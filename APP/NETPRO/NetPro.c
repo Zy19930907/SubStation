@@ -2,8 +2,13 @@
 #include "NetDataPro.h"
 #include "DebugPro.h"
 
+
+
 void UdpPro(void);
 void NetSendData(u8 socketn,u8 *buf,u16 len);
+static inline void SerchCmdDeal(void);
+static inline void BootCmdDeal(void);
+
 W5500SOCKET* Sockets[MAXSOCKETCNT];
 
 u32 TASKID_NETPRO = 0xFFFFFFFF;
@@ -11,27 +16,28 @@ u32 TASKID_UDPPRO = 0xFFFFFFFF;
 _NetManger NetManger;
 _Udp Udp;
 
+//TCP端口0接收到数据
 void TcpSocket0Recv(u8 *buf,u16 len)
 {	
 //	SetPcLinkStatus(TCPSOCKET0,1);
 	NetManger.SocketTick[TCPSOCKET0] = SYS_TICK;
 	HandleNetData(TCPSOCKET0,buf,len,0);
 }
-
+//TCP端口1接收到数据
 void TcpSocket1Recv(u8 *buf,u16 len)
 {
 //	SetPcLinkStatus(TCPSOCKET1,1);
 	NetManger.SocketTick[TCPSOCKET1] = SYS_TICK;
 	HandleNetData(TCPSOCKET1,buf,len,0);
 }
-
+//TCP端口2接收到数据
 void TcpSocket2Recv(u8 *buf,u16 len)
 {
 //	SetPcLinkStatus(TCPSOCKET2,1);
 	NetManger.SocketTick[TCPSOCKET2] = SYS_TICK;
 	HandleNetData(TCPSOCKET2,buf,len,0);
 }
-
+//UDP端口0接收到数据
 void UdpSocket0Recv(u8 *buf,u16 len)
 {
 	NetManger.SocketTick[UDPSOCKET0] = SYS_TICK;
@@ -43,7 +49,7 @@ void DebugSocketRecv(u8 *buf,u16 len)
 	NetManger.SocketTick[DEBUGSOCKET] = SYS_TICK;
 	HandleDebugCmd(buf,len);
 }
-
+//TCP端口1接收到数据
 void UdpSocket1Recv(u8 *buf,u16 len)
 {
 	u8 i;
@@ -51,29 +57,17 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 	cJSON* BootCmd;
 	cJSON* pItem;
 	cJSON* pArray;
-	cJSON* Ack;
-	char ipAddr[30];
-	char macAddr[30];
+	
 	NetManger.SocketTick[UDPSOCKET1] = SYS_TICK;
-	Ack = cJSON_CreateObject();
+	
 	BootCmd = cJSON_Parse((char*)buf);
 	if(BootCmd != 0)
 	{
 		myfree(SRAMIN,Udp.ackData);
 		pItem = cJSON_GetObjectItem(BootCmd,"cmdType");
 		if(BufCmp((u8*)pItem->valuestring,(u8*)"SERCHDEV",7))//搜索设备指令
-		{
-			cJSON_AddStringToObject(Ack,"cmdType","AckSerch");//数据类型，应答设备搜索
-			cJSON_AddStringToObject(Ack,"softVer",Version);//分站软件版本
-			sprintf(ipAddr,"%d.%d.%d.%d",Net.localIp[0],Net.localIp[1],Net.localIp[2],Net.localIp[3]);
-			cJSON_AddStringToObject(Ack,"ipAddr",ipAddr);//分站IP地址
-			sprintf(macAddr,"%02x:%02x:%02x:%02x:%02x:%02x",Net.MacAddr[0],Net.MacAddr[1],Net.MacAddr[2],Net.MacAddr[3],Net.MacAddr[4],Net.MacAddr[5]);
-			cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
-			cJSON_AddNullToObject(Ack,"data");
-			cJSON_AddStringToObject(Ack,"position","三采区变电所综合分站");//分站安装位置
-			Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);
-			Udp.cmdType = 0x01;
-		}else if(BufCmp((u8*)pItem->valuestring,(u8*)"ENTERBOOT",8))//进入引导程序指令
+			SerchCmdDeal();
+		else if(BufCmp((u8*)pItem->valuestring,(u8*)"ENTERBOOT",8))//进入引导程序指令
 		{
 			pItem = cJSON_GetObjectItem(BootCmd,"data");//获取数据域
 			pArray = pItem->child;
@@ -83,18 +77,13 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 				pArray = pArray->next;
 			}
 			UpdateBootLoader(iapServerIp);//固件更新服务器地址存入EEPROM，引导程序读取后连接
-			cJSON_AddStringToObject(Ack,"cmdType","AckEnterBoot");
-			cJSON_AddStringToObject(Ack,"softVer",Version);
-			cJSON_AddNullToObject(Ack,"data");
-			cJSON_AddNullToObject(Ack,"ipAddr");
-			cJSON_AddNullToObject(Ack,"macAddr");
-			Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);
-			Udp.cmdType = 0x02;
+			BootCmdDeal();
 		}
+		
 		Udp.Tick = SYS_TICK;
 		Udp.Status = UDPRECV;
 	}
-	cJSON_Delete(Ack);
+	
 	cJSON_Delete(BootCmd);
 }
 
@@ -103,8 +92,8 @@ void CreatUserPort(void)
 	Sockets[TCPSOCKET0] = Net.newTcpServer(5000,TcpSocket0Recv);//创建TCPSERVER端口1
 	Sockets[TCPSOCKET1] = Net.newTcpServer(5001,TcpSocket1Recv);//创建TCPSERVER端口2
 	Sockets[TCPSOCKET2] = Net.newTcpServer(5002,TcpSocket2Recv);//创建TCPSERVER端口3
-	Sockets[UDPSOCKET0] = Net.newUdpSocket(5003,UdpSocket0Recv);//创建UDP端口
-	Sockets[UDPSOCKET1] = Net.newUdpSocket(5005,UdpSocket1Recv);//创建UDP端口
+	Sockets[UDPSOCKET0] = Net.newUdpSocket(5003,UdpSocket0Recv);//创建UDP端口0
+	Sockets[UDPSOCKET1] = Net.newUdpSocket(5005,UdpSocket1Recv);//创建UDP端口1
 	Sockets[DEBUGSOCKET] = Net.newTcpServer(5004,DebugSocketRecv);//创建TCPSERVER端口4
 	TASKID_UDPPRO = CreateTask("UdpPro",0,0,0,0,0,UdpPro);
 	NetManger.SocketTick[TCPSOCKET0] = SYS_TICK;
@@ -195,8 +184,47 @@ void UdpPro(void)
 			Net.SendUdpData(Net.SocketSelect,Udp.ackData,strlen((char*)Udp.ackData),Net.SocketSelect->remoteIP,12121);
 			myfree(SRAMIN,Udp.ackData);
 			if(Udp.cmdType == 0x02)
-				Sys_Soft_Reset();
+			{
+				Net.CloseAllSocket();//关闭所有Socket
+				Sys_Soft_Reset();//启动引导程序
+			}
 			Udp.Status = UDPIDLE;
 			break;
 	}
+}
+
+//处理设备搜索指令
+static inline void SerchCmdDeal(void)
+{
+	cJSON* Ack;
+	char ipAddr[30];
+	char macAddr[30];
+	
+	Ack = cJSON_CreateObject();//创建Json对象
+	cJSON_AddStringToObject(Ack,"cmdType","AckSerch");//数据类型，应答设备搜索
+	cJSON_AddStringToObject(Ack,"softVer",Version);//分站软件版本
+	sprintf(ipAddr,"%d.%d.%d.%d",Net.localIp[0],Net.localIp[1],Net.localIp[2],Net.localIp[3]);
+	cJSON_AddStringToObject(Ack,"ipAddr",ipAddr);//分站IP地址
+	sprintf(macAddr,"%02x:%02x:%02x:%02x:%02x:%02x",Net.MacAddr[0],Net.MacAddr[1],Net.MacAddr[2],Net.MacAddr[3],Net.MacAddr[4],Net.MacAddr[5]);
+	cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
+	cJSON_AddNullToObject(Ack,"data");//无数据域，返回空
+	cJSON_AddStringToObject(Ack,"position","三采区变电所综合分站");//分站安装位置
+	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);
+	Udp.cmdType = 0x01;//UDP命令类型
+	cJSON_Delete(Ack);//释放Json对象占用的内存
+}
+
+//处理进入引导程序指令
+static inline void BootCmdDeal(void)
+{
+	cJSON* Ack;
+	Ack = cJSON_CreateObject();//创建Json对象
+	cJSON_AddStringToObject(Ack,"cmdType","AckEnterBoot");
+	cJSON_AddStringToObject(Ack,"softVer",Version);
+	cJSON_AddNullToObject(Ack,"data");
+	cJSON_AddNullToObject(Ack,"ipAddr");
+	cJSON_AddNullToObject(Ack,"macAddr");
+	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);
+	Udp.cmdType = 0x02;
+	cJSON_Delete(Ack);//释放Json对象占用的内存
 }

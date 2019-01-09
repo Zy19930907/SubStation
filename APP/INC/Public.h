@@ -54,8 +54,8 @@
 #define MaxPowerNum   			15
 #endif
 
-#define Version					"T1.1"
-#define SoftVerb       			11
+#define Version					"T1.2"
+#define SoftVerb       			12
 
 #define DelayAckTime         	30
 #define SystemSyncTime       	5

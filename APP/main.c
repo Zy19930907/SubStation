@@ -36,7 +36,7 @@ void SdInit(void)
 	mf_mount((u8*)"0:/");											//挂载SD卡
 	CheckLogDirs();													//检查SD卡中是否存在日志文件夹，没有则新建
 	SetTaskDelay(TASKID_RUNLED,0,0,0,0,500);
-//	TASKID_MP3TASK = CreateTask("Mp3Pro",0,0,0,0,0,MP3Pro);
+//	TASKID_MP3TASK = CreateTask("Mp3Pro",0,0,0,0,0,MP3Pro);			//创建MP3播放任务
 	DelTask(&TASKID_SDINIT);
 }
 
