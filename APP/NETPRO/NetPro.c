@@ -2,8 +2,6 @@
 #include "NetDataPro.h"
 #include "DebugPro.h"
 
-
-
 void UdpPro(void);
 void NetSendData(u8 socketn,u8 *buf,u16 len);
 static inline void SerchCmdDeal(void);

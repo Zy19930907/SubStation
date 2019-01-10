@@ -11,7 +11,7 @@ void DelatePowerOffLogBean(void);
 void JsonBytesToLogBean(char *logBuf);
 void GetPowerOffTime(char *time);
 void GetPowerOffTriggerInfo(char *triggerInfo);
-void GetPowerOffTypr(char *type);
+void GetPowerOffType(char *type);
 void GetPowerOffInfo(char *time,char *triggerInfo,char *type);
 void CreatePowerOffBean(char *time,char *triggerInfo,char *type);
 void PowerOffLogBeanToJsonBytes(char *jsonBytes);

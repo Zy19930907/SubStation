@@ -54,9 +54,8 @@ int main(void)
 	delay_ms(100);													//延时等待EEPROM正常工作
 	ReadDefaultConfig();											//读取默认配置
 //	LcdInit();														//初始化LCD spi接口，初始化EMWIN
-	
 	TASKID_SDINIT = CreateTask("SD卡初始化",0,0,0,0,500,SdInit);	//SD卡初始化任务
-	TASKID_RUNLED = CreateTask("运行指示灯",0,0,0,0,30,RunLedTask); //运行指示灯任务
+	TASKID_RUNLED = CreateTask("运行指示灯",0,0,0,0,100,RunLedTask); //运行指示灯任务
 	CreateTask("更新时钟",0,0,0,1,0,FreshSysRtc);					//获取实时时钟
 	TASKID_NETPRO = CreateTask("网络数据收发",0,0,0,0,0,NetPro);	//网络数据收发及处理任务
 	TASKID_CANPRO = CreateTask("CAN数据收发",0,0,0,0,0,CanPro);		//CAN数据收发及处理任务

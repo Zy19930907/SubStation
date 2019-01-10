@@ -36,7 +36,7 @@ void FreshBreakPowerLog(void)
 			LISTVIEW_DeleteAllRows(poweroffLogListView);
 			BreakLogFresh.Status = BREAKLOGFRESHITEM;
 			break;
-		
+		//刷新断电日志
 		case BREAKLOGFRESHITEM:
 			logLen = ReadBreakPowerLog(log);
 			if((logLen != 0) && (BreakLogFresh.readSize < BreakLogFresh.logFileSize))
@@ -54,11 +54,11 @@ void FreshBreakPowerLog(void)
 			else
 				BreakLogFresh.Status = BREAKLOGFRESHEND;
 			break;
-			
+		//断电日志刷新完成	
 		case BREAKLOGFRESHEND:
 			SetListViewRowBkColor(poweroffLogListView);
 			BreakLogFresh.Status = BREAKLOGFRESHINIT;
-			DelTask(&TASKID_FRESHBREAKLOG);
+			DelTask(&TASKID_FRESHBREAKLOG);//删除刷新任务
 			break;
 	}
 }

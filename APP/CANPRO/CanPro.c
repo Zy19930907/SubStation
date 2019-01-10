@@ -498,7 +498,8 @@ void AckFunc(u8 index, u8 cmd, u8 DestAddr)
     CanSendData(index, Can.ID, &buf[0], 1);
 #else
     Can.ID = (u32) MakeFramID(0, cmd, DestAddr);
-    if(Device[DestAddr - 1].Flag & 0x04)            // 参与断线控制
+//    if(Device[DestAddr - 1].Flag & 0x04)            // 参与断线控制
+	if(Device[DestAddr - 1].Warn)
         Can.ID |= 0x8000;
     buf[0] = Device[DestAddr - 1].Warn & 0x7F;
     if(Sys.Delay)                                  // 倒计时未结束，不发控制指令

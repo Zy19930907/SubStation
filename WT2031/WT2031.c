@@ -222,12 +222,12 @@ void WT2KReadData(void)
 	delay_10ns(40);
 	for(i=0;i<16;i++)
 	{
-			WT2031_TX_CLK_SET(1);
-			delay_10ns(50);
-			DATA <<= 1;
-			DATA += WT2031_TX_DATA_VALUE;
-			WT2031_TX_CLK_SET(0);
-			delay_10ns(50);
+		WT2031_TX_CLK_SET(1);
+		delay_10ns(50);
+		DATA <<= 1;
+		DATA += WT2031_TX_DATA_VALUE;
+		WT2031_TX_CLK_SET(0);
+		delay_10ns(50);
 	}
 	for(j=0;j<24;j++)
 	{
@@ -368,6 +368,7 @@ void WT2031Pro(void)
 			if(WT2031_EPR_VALUE)
 				WT2031.Status = WTRDHD;
 			break;
+			
 		case WTRDHD:
 			if(WT_DATA_STB())
 			{

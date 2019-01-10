@@ -141,11 +141,6 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>DLGUARM</Key>
-          <Name>爀?燩爀?燩爀?</Name>
-        </SetRegEntry>
-        <SetRegEntry>
-          <Number>0</Number>
           <Key>DLGDARM</Key>
           <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
@@ -184,18 +179,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>80</LineNumber>
+          <LineNumber>501</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134259392</Address>
+          <Address>134223270</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鑿茶帿\缁煎悎鍒嗙珯\SubStation\APP\NETPRO\NetPro.c</Filename>
+          <Filename>D:\鑿茶帿\缁煎悎鍒嗙珯\SubStation\APP\CANPRO\CanPro.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Station\APP/NETPRO/NetPro.c\80</Expression>
+          <Expression>\\Station\APP/CANPRO/CanPro.c\501</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -354,7 +349,7 @@
 
   <Group>
     <GroupName>APP</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -758,7 +753,7 @@
 
   <Group>
     <GroupName>WT2031</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -906,7 +901,7 @@
 
   <Group>
     <GroupName>PAGES</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1214,7 +1209,7 @@
 
   <Group>
     <GroupName>BEANS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

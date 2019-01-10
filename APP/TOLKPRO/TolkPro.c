@@ -5,7 +5,6 @@ u32 TASKID_WT2031TASK = 0xFFFFFFFF;
 
 void TolkPro(void)
 {
-	_Can UploadCan;
 	switch(TolkManger.Status)
 	{
 		case TOLKINIT:
@@ -30,8 +29,7 @@ void TolkPro(void)
 					break;
 				
 				case TOLKUP:
-					UploadCan.ID = MakeFeimoCanId(0,0x04,0,1,0x28,30);
-					CanSendData(CAN_1,UploadCan.ID,TolkManger.VoiceSend,TolkManger.VoiceSendLen);
+					
 					break;
 			}
 			TolkManger.Status = TOLKIDLE;

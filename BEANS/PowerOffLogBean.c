@@ -1,24 +1,24 @@
 #include "PowerOffLogBean.h"
 
 cJSON *PowerOffLogBean;
-
+//将数组转换为Json对象
 void JsonBytesToLogBean(char *logBuf)
 {
 	PowerOffLogBean = cJSON_Parse(logBuf);
 }
-
+//释放Json对象占用内存
 void DelatePowerOffLogBean(void)
 {
 	cJSON_Delete(PowerOffLogBean);
 }
-
+//获取Json对象中的断电时间
 void GetPowerOffTime(char *time)
 {
 	cJSON *pItem;
 	pItem = cJSON_GetObjectItem(PowerOffLogBean,POWEROFFTIMKEY);
 	strcpy(time,pItem->valuestring);
 }
-
+//获取Json对象中的锻炼类型
 void GetPowerOffTriggerInfo(char *triggerInfo)
 {
 	cJSON *pItem;
@@ -26,7 +26,7 @@ void GetPowerOffTriggerInfo(char *triggerInfo)
 	strcpy(triggerInfo,pItem->valuestring);
 }
 
-void GetPowerOffTypr(char *type)
+void GetPowerOffType(char *type)
 {
 	cJSON *pItem;
 	pItem = cJSON_GetObjectItem(PowerOffLogBean,POWEROFFTYPE);
