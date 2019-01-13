@@ -203,9 +203,9 @@ void AnswerUnRegisterInfo(u8 sn)
     SetCrcAndAck(sn, t);
 }
 
-void AnswerResetCrcFail(u8 sn)
+void AnswerResetCrcFail(u8 sn,u8 *buf)
 {
-    Device[Net.Buf[12] - 1].CrcCnt = 0;
+    Device[buf[12] - 1].CrcCnt = 0;
     AnswerAck(sn, 0);
 }
 
@@ -480,7 +480,7 @@ void AnswerCheckNetBiSuoFilterTime(u8 sn)
     Net.Buf[t++] = Sys.FilterTime;
     Net.Buf[t++] = Sys.FilterTime>> 8;
 
-    // 先修改数据个数
+    //先修改数据个数
     Net.Buf[6] = t + 2;      // 低八位
     Net.Buf[7] = 0;          // 高八位
     SetCrcAndAck(sn, t);
@@ -690,7 +690,7 @@ void HandleNetData(u8 sn, u8 *buf, u16 len, u8 flag)
         AnswerCrcFail(sn);
         break;//查询初始化失败的设备
     case 0x67:
-        AnswerResetCrcFail(sn);
+        AnswerResetCrcFail(sn,buf);
         break;//复位某个初始化失败的设备
     case 0x68:
         AnswerCrcInfo(sn);

@@ -208,7 +208,7 @@ void ExecTask(void)
 	_Task* Task;
 	for(;;)
 	{
-		TaskManger.Tick = SYS_TICK;
+//		TaskManger.Tick = SYS_TICK;
 		for(i=0;i<MAXTASKCNT;i++)
 		{
 			if(!((TaskManger.Flag >> i) & 0x01))					//未添加任务
@@ -217,15 +217,15 @@ void ExecTask(void)
 			Task = &TaskManger.Tasks[i];
 			if(MsTickDiff(Task->Tick) >= Task->DelayTime)
 			{
-				Task->ExecInterval = MsTickDiff(Task->Tick);		//计算上次执行任务到本次执行任务的时间间隔
+//				Task->ExecInterval = MsTickDiff(Task->Tick);		//计算上次执行任务到本次执行任务的时间间隔
 				Task->Tick = SYS_TICK;
 				Task->TaskFunction();								//执行任务函数
-				Task->UseTime = MsTickDiff(Task->Tick);				//计算本次执行任务用时
-				if(Task->UseTime > Task->MaxUseTime)
-					Task->MaxUseTime = Task->UseTime;
-				Task->ExecCnt++;
+//				Task->UseTime = MsTickDiff(Task->Tick);				//计算本次执行任务用时
+//				if(Task->UseTime > Task->MaxUseTime)
+//					Task->MaxUseTime = Task->UseTime;
+//				Task->ExecCnt++;
 			}
 		}
-		TaskManger.AllTaskUseTime = MsTickDiff(TaskManger.Tick);	//计算所有任务执行耗时 
+//		TaskManger.AllTaskUseTime = MsTickDiff(TaskManger.Tick);	//计算所有任务执行耗时 
 	}
 }

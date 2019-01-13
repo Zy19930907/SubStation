@@ -3,13 +3,13 @@
 vu32 MemUsed[SRAMBANK] = {0,0,0};
 
 //内存池(32字节对齐)
-__align(32) u8 mem1base[MEM1_MAX_SIZE];													//内部SRAM内存池
-__align(32) u8 mem2base[MEM2_MAX_SIZE] __attribute__((at(0XC01F4000)));					//外部SDRAM内存池,前面2M给LTDC用了(1280*800*2)
-__align(32) u8 mem3base[MEM3_MAX_SIZE] __attribute__((at(0X10000000)));					//内部CCM内存池
+__align(32) u8 mem1base[MEM1_MAX_SIZE];																//内部SRAM内存池
+__align(32) u8 mem2base[MEM2_MAX_SIZE] __attribute__((at(0XC01F4000)));								//外部SDRAM内存池,前面2M给LTDC用了(1280*800*2)
+__align(32) u8 mem3base[MEM3_MAX_SIZE] __attribute__((at(0X10000000)));								//内部CCM内存池
 //内存管理表
-u32 mem1mapbase[MEM1_ALLOC_TABLE_SIZE];													//内部SRAM内存池MAP
-u32 mem2mapbase[MEM2_ALLOC_TABLE_SIZE] __attribute__((at(0XC01F4000+MEM2_MAX_SIZE)));	//外部SRAM内存池MAP
-u32 mem3mapbase[MEM3_ALLOC_TABLE_SIZE] __attribute__((at(0X10000000+MEM3_MAX_SIZE)));	//内部CCM内存池MAP
+u32 mem1mapbase[MEM1_ALLOC_TABLE_SIZE];																//内部SRAM内存池MAP
+u32 mem2mapbase[MEM2_ALLOC_TABLE_SIZE] __attribute__((at(0XC01F4000+MEM2_MAX_SIZE)));				//外部SRAM内存池MAP
+u32 mem3mapbase[MEM3_ALLOC_TABLE_SIZE] __attribute__((at(0X10000000+MEM3_MAX_SIZE)));				//内部CCM内存池MAP
 //内存管理参数	   
 const u32 memtblsize[SRAMBANK]={MEM1_ALLOC_TABLE_SIZE,MEM2_ALLOC_TABLE_SIZE,MEM3_ALLOC_TABLE_SIZE};	//内存表大小
 const u32 memblksize[SRAMBANK]={MEM1_BLOCK_SIZE,MEM2_BLOCK_SIZE,MEM3_BLOCK_SIZE};					//内存分块大小
@@ -80,9 +80,7 @@ u32 my_mem_malloc(u8 memx,u32 size)
 		if(cmemb==nmemb)							//找到了连续nmemb个空内存块
 		{
             for(i=0;i<nmemb;i++)  					//标注内存块非空 
-            {  
-                mallco_dev.memmap[memx][offset+i]=nmemb;  
-            }  
+                mallco_dev.memmap[memx][offset+i]=nmemb;    
             return (offset*memblksize[memx]);//返回偏移地址  
 		}
     }  
@@ -92,7 +90,7 @@ u32 my_mem_malloc(u8 memx,u32 size)
 //memx:所属内存块
 //offset:内存地址偏移
 //返回值:0,释放成功;1,释放失败;  
-u8 my_mem_free(u8 memx,u32 offset)  
+static inline u8 my_mem_free(u8 memx,u32 offset)  
 {  
     int i;  
     if(!mallco_dev.memrdy[memx])//未初始化,先执行初始化
@@ -106,12 +104,10 @@ u8 my_mem_free(u8 memx,u32 offset)
         int nmemb=mallco_dev.memmap[memx][index];	//内存块数量
 		MemUsed[memx] -= nmemb * MEM1_BLOCK_SIZE;
         for(i=0;i<nmemb;i++)  						//内存块清零
-        {  
-            mallco_dev.memmap[memx][index+i]=0;  
-        }  
+            mallco_dev.memmap[memx][index+i]=0;   
         return 0;  
     }else return 2;//偏移超区了.  
-}  
+}
 //释放内存(外部调用) 
 //memx:所属内存块
 //ptr:内存首地址 
@@ -155,15 +151,4 @@ void *myrealloc(u8 memx,void *ptr,u32 size)
         return (void*)((u32)mallco_dev.membase[memx]+offset);  				//返回新内存首地址
     }  
 }
-
-
-
-
-
-
-
-
-
-
-
 

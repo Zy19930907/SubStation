@@ -81,7 +81,6 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 		Udp.Tick = SYS_TICK;
 		Udp.Status = UDPRECV;
 	}
-	
 	cJSON_Delete(BootCmd);
 }
 

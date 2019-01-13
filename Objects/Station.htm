@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Station.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Station.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Jan 10 09:39:32 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jan 11 17:36:51 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1692 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1112,8 +1112,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleNetData
 </UL>
 
-<P><STRONG><a name="[e3]"></a>AnswerResetCrcFail</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, netdatapro.o(i.AnswerResetCrcFail))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = AnswerResetCrcFail &rArr; AnswerAck &rArr; SetCrcAndAck &rArr; SetCrc16 &rArr; CalCrc16
+<P><STRONG><a name="[e3]"></a>AnswerResetCrcFail</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, netdatapro.o(i.AnswerResetCrcFail))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = AnswerResetCrcFail &rArr; AnswerAck &rArr; SetCrcAndAck &rArr; SetCrc16 &rArr; CalCrc16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnswerAck
 </UL>
@@ -1663,7 +1663,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> socket.o(i.W5500Init)
 </UL>
-<P><STRONG><a name="[138]"></a>ExecTask</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, taskmanger.o(i.ExecTask))
+<P><STRONG><a name="[138]"></a>ExecTask</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, taskmanger.o(i.ExecTask))
 <BR><BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsTickDiff
 </UL>
 <BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1932,7 +1932,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DebugSocketRecv
 </UL>
 
-<P><STRONG><a name="[155]"></a>HandleNetData</STRONG> (Thumb, 762 bytes, Stack size 24 bytes, netdatapro.o(i.HandleNetData))
+<P><STRONG><a name="[155]"></a>HandleNetData</STRONG> (Thumb, 764 bytes, Stack size 24 bytes, netdatapro.o(i.HandleNetData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 356<LI>Call Chain = HandleNetData &rArr; ReadDefaultInit &rArr; CalDeviceCrc &rArr; CalCrc16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateReadPtr
@@ -4138,12 +4138,6 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveLog
 </UL>
 
-<P><STRONG><a name="[231]"></a>my_mem_free</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, malloc.o(i.my_mem_free))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = my_mem_free
-</UL>
-<BR>[Called By]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myfree
-</UL>
-
 <P><STRONG><a name="[0]"></a>my_mem_init</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, malloc.o(i.my_mem_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = my_mem_init &rArr; mymemset
 </UL>
@@ -4289,6 +4283,12 @@ Local Symbols
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UdpSocket1Recv
+</UL>
+
+<P><STRONG><a name="[231]"></a>my_mem_free</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, malloc.o(i.my_mem_free))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = my_mem_free
+</UL>
+<BR>[Called By]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myfree
 </UL>
 
 <P><STRONG><a name="[1e3]"></a>buffer_skip_whitespace</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, cjson.o(i.buffer_skip_whitespace))
