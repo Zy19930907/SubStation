@@ -89,7 +89,6 @@ void GetTaskList(void)
 	{
 		if(!((TaskManger.Flag >> i) & 0x01))
 			continue;
-		
 		Task = &TaskManger.Tasks[i];
 		TaskInfo = cJSON_CreateObject();
 		cJSON_AddItemToObject(TaskInfo, "Id",cJSON_CreateNumber(i));

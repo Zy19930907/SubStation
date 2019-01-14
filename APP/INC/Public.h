@@ -35,6 +35,7 @@
 #include "Key.h"
 #include "TolkPro.h"
 #include "MP3Pro.h"
+#include "CrcMaker.h"
 //UI
 #include "GUI.h"
 #include "WM.h"
@@ -159,7 +160,9 @@ typedef struct
     u8  Warn;     // 针对于读卡器和断电器等执行设备，该字节表示此时报警事件
     u8  RecTimes;
     u32 Tick;
+	
 	u8 ShowFlag;//超限或断线时标记该传感器显示颜色
+	u8 MusicFlag;//音乐播放标志
 }_Sensor;
 
 typedef struct

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Station.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Station.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jan 11 17:36:51 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jan 14 12:55:58 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1692 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -536,10 +536,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
-<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clmt_clust
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
+<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
 <LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_write
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clmt_clust
 <LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 <LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ldivmod
@@ -716,19 +716,19 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[99]"></a>__aeabi_llsl</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, llshl.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
+<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 
 <P><STRONG><a name="[258]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[98]"></a>__aeabi_llsr</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, llushr.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 
 <P><STRONG><a name="[259]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
@@ -803,9 +803,9 @@ Global Symbols
 <P><STRONG><a name="[b1]"></a>_double_round</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, depilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 
 <P><STRONG><a name="[a1]"></a>_double_epilogue</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, depilogue.o(.text))
@@ -821,10 +821,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b2]"></a>__aeabi_dadd</STRONG> (Thumb, 322 bytes, Stack size 48 bytes, dadd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
+<BR><BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
@@ -3083,7 +3083,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> netpro.o(i.CreatUserPort)
 </UL>
-<P><STRONG><a name="[70]"></a>TcpSocket1Recv</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, netpro.o(i.TcpSocket1Recv))
+<P><STRONG><a name="[70]"></a>TcpSocket1Recv</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, netpro.o(i.TcpSocket1Recv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 372<LI>Call Chain = TcpSocket1Recv &rArr; HandleNetData &rArr; ReadDefaultInit &rArr; CalDeviceCrc &rArr; CalCrc16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleNetData
@@ -3860,8 +3860,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[229]"></a>disk_status</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, diskio.o(i.disk_status))
-<BR><BR>[Called By]<UL><LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;validate
+<BR><BR>[Called By]<UL><LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;validate
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
 </UL>
 
 <P><STRONG><a name="[212]"></a>disk_write</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, diskio.o(i.disk_write))
@@ -3897,13 +3897,13 @@ Global Symbols
 <P><STRONG><a name="[217]"></a>f_lseek</STRONG> (Thumb, 1050 bytes, Stack size 96 bytes, ff.o(i.f_lseek))
 <BR><BR>[Stack]<UL><LI>Max Depth = 476<LI>Call Chain = f_lseek &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<BR>[Calls]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_read
+<LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;validate
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
 <LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clmt_clust
-<LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_read
-<LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;validate
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_lseek
@@ -3912,12 +3912,7 @@ Global Symbols
 <P><STRONG><a name="[218]"></a>f_mkdir</STRONG> (Thumb, 500 bytes, Stack size 128 bytes, ff.o(i.f_mkdir))
 <BR><BR>[Stack]<UL><LI>Max Depth = 804<LI>Call Chain = f_mkdir &rArr; dir_register &rArr; dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
-<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
-<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
-<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
+<BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memfree
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memalloc
 <LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_window
@@ -3928,6 +3923,11 @@ Global Symbols
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_set
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cpy
+<LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
+<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_open
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_mkdir
@@ -3945,10 +3945,7 @@ Global Symbols
 <P><STRONG><a name="[224]"></a>f_open</STRONG> (Thumb, 700 bytes, Stack size 128 bytes, ff.o(i.f_open))
 <BR><BR>[Stack]<UL><LI>Max Depth = 804<LI>Call Chain = f_open &rArr; dir_register &rArr; dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
-<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
+<BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memfree
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memalloc
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
@@ -3960,6 +3957,9 @@ Global Symbols
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_qword
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_clust
+<LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_open
 </UL>
@@ -3967,14 +3967,14 @@ Global Symbols
 <P><STRONG><a name="[227]"></a>f_opendir</STRONG> (Thumb, 226 bytes, Stack size 48 bytes, ff.o(i.f_opendir))
 <BR><BR>[Stack]<UL><LI>Max Depth = 620<LI>Call Chain = f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
-<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memfree
+<BR>[Calls]<UL><LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memfree
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memalloc
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_qword
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_clust
+<LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_opendir
 </UL>
@@ -3982,8 +3982,7 @@ Global Symbols
 <P><STRONG><a name="[215]"></a>f_sync</STRONG> (Thumb, 398 bytes, Stack size 112 bytes, ff.o(i.f_sync))
 <BR><BR>[Stack]<UL><LI>Max Depth = 572<LI>Call Chain = f_sync &rArr; load_obj_dir &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
+<BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fattime
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memfree
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_memalloc
 <LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
@@ -3996,6 +3995,7 @@ Global Symbols
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_clust
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
 </UL>
 <BR>[Called By]<UL><LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_close
 </UL>
@@ -4003,13 +4003,13 @@ Global Symbols
 <P><STRONG><a name="[228]"></a>f_write</STRONG> (Thumb, 658 bytes, Stack size 80 bytes, ff.o(i.f_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 460<LI>Call Chain = f_write &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
-<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
-<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clmt_clust
-<LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
+<BR>[Calls]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
 <LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_read
 <LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;validate
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cpy
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
+<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clmt_clust
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mf_write
@@ -4046,10 +4046,10 @@ Global Symbols
 <P><STRONG><a name="[1f1]"></a>ff_wtoupper</STRONG> (Thumb, 156 bytes, Stack size 12 bytes, cc936.o(i.ff_wtoupper))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = ff_wtoupper
 </UL>
-<BR>[Called By]<UL><LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
+<BR>[Called By]<UL><LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xname_sum
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_name
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmp_lfn
-<LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xname_sum
 </UL>
 
 <P><STRONG><a name="[21c]"></a>get_fattime</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, diskio.o(i.get_fattime))
@@ -4468,8 +4468,8 @@ Local Symbols
 <LI><a href="#[238]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_decimal_point
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ensure
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sscanf
 <LI><a href="#[244]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sprintf
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sscanf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;print_value
 </UL>
@@ -4554,8 +4554,8 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
-<LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
+<BR>[Called By]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
+<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
 </UL>
 
 <P><STRONG><a name="[1eb]"></a>check_fs</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, ff.o(i.check_fs))
@@ -4583,12 +4583,12 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[204]"></a>clust2sect</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, ff.o(i.clust2sect))
-<BR><BR>[Called By]<UL><LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
+<BR><BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
 <LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_write
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
 
 <P><STRONG><a name="[1f0]"></a>cmp_lfn</STRONG> (Thumb, 148 bytes, Stack size 32 bytes, ff.o(i.cmp_lfn))
@@ -4603,24 +4603,24 @@ Local Symbols
 <P><STRONG><a name="[1f2]"></a>create_chain</STRONG> (Thumb, 350 bytes, Stack size 32 bytes, ff.o(i.create_chain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 380<LI>Call Chain = create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<BR>[Calls]<UL><LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_bitmap
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;change_bitmap
-<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
+<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
 <LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_write
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
 
 <P><STRONG><a name="[1f6]"></a>create_name</STRONG> (Thumb, 602 bytes, Stack size 56 bytes, ff.o(i.create_name))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = create_name &rArr; ff_convert
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chk_chr
-<LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_wtoupper
+<BR>[Calls]<UL><LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_wtoupper
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_convert
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_set
+<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chk_chr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
 </UL>
@@ -4638,9 +4638,9 @@ Local Symbols
 <P><STRONG><a name="[1fd]"></a>dir_alloc</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, ff.o(i.dir_alloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 436<LI>Call Chain = dir_alloc &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<BR>[Calls]<UL><LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 </UL>
 <BR>[Called By]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
@@ -4648,16 +4648,16 @@ Local Symbols
 <P><STRONG><a name="[200]"></a>dir_find</STRONG> (Thumb, 416 bytes, Stack size 56 bytes, ff.o(i.dir_find))
 <BR><BR>[Stack]<UL><LI>Max Depth = 540<LI>Call Chain = dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_read
-<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmp_lfn
-<LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_wtoupper
+<BR>[Calls]<UL><LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ff_wtoupper
 <LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xname_sum
 <LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sum_sfn
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cmp
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_word
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_read
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
+<LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmp_lfn
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
@@ -4666,28 +4666,28 @@ Local Symbols
 <P><STRONG><a name="[1ff]"></a>dir_next</STRONG> (Thumb, 288 bytes, Stack size 32 bytes, ff.o(i.dir_next))
 <BR><BR>[Stack]<UL><LI>Max Depth = 412<LI>Call Chain = dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<BR>[Calls]<UL><LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_window
+<LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_set
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
-<LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_window
-<LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
+<BR>[Called By]<UL><LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
+<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 <LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_read
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_alloc
-<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
-<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
 </UL>
 
 <P><STRONG><a name="[201]"></a>dir_read</STRONG> (Thumb, 260 bytes, Stack size 40 bytes, ff.o(i.dir_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 484<LI>Call Chain = dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sum_sfn
+<BR>[Calls]<UL><LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sum_sfn
 <LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pick_lfn
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
 <BR>[Called By]<UL><LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
 </UL>
@@ -4695,14 +4695,7 @@ Local Symbols
 <P><STRONG><a name="[207]"></a>dir_register</STRONG> (Thumb, 524 bytes, Stack size 136 bytes, ff.o(i.dir_register))
 <BR><BR>[Stack]<UL><LI>Max Depth = 676<LI>Call Chain = dir_register &rArr; dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gen_numname
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
-<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
-<LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_alloc
-<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_xdir
-<LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sum_sfn
+<BR>[Calls]<UL><LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sum_sfn
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
 <LI><a href="#[20a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_qword
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_lfn
@@ -4710,6 +4703,13 @@ Local Symbols
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_set
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cpy
 <LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
+<LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gen_numname
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
+<LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_alloc
+<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_xdir
 </UL>
 <BR>[Called By]<UL><LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
@@ -4722,12 +4722,12 @@ Local Symbols
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
 </UL>
 <BR>[Called By]<UL><LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_opendir
+<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
+<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_alloc
-<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
-<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
 </UL>
 
 <P><STRONG><a name="[208]"></a>fill_fat_chain</STRONG> (Thumb, 54 bytes, Stack size 24 bytes, ff.o(i.fill_fat_chain))
@@ -4735,8 +4735,8 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
 </UL>
-<BR>[Called By]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
-<LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<BR>[Called By]<UL><LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 
 <P><STRONG><a name="[1f4]"></a>find_bitmap</STRONG> (Thumb, 164 bytes, Stack size 48 bytes, ff.o(i.find_bitmap))
@@ -4750,15 +4750,15 @@ Local Symbols
 <P><STRONG><a name="[219]"></a>find_volume</STRONG> (Thumb, 1106 bytes, Stack size 96 bytes, ff.o(i.find_volume))
 <BR><BR>[Stack]<UL><LI>Max Depth = 412<LI>Call Chain = find_volume &rArr; check_fs &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[223]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_ldnumber
-<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
-<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_fs
-<LI><a href="#[229]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_status
+<BR>[Calls]<UL><LI><a href="#[229]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_status
 <LI><a href="#[20f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_initialize
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_word
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_qword
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
+<LI><a href="#[223]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_ldnumber
+<LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clust2sect
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_fs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_opendir
 <LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
@@ -4769,12 +4769,12 @@ Local Symbols
 <P><STRONG><a name="[21b]"></a>follow_path</STRONG> (Thumb, 228 bytes, Stack size 32 bytes, ff.o(i.follow_path))
 <BR><BR>[Stack]<UL><LI>Max Depth = 572<LI>Call Chain = follow_path &rArr; dir_find &rArr; dir_read &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
-<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_name
-<LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_qword
+<BR>[Calls]<UL><LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_qword
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_clust
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
+<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_name
 </UL>
 <BR>[Called By]<UL><LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_opendir
 <LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
@@ -4797,18 +4797,18 @@ Local Symbols
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
+<LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_lseek
-<LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
 </UL>
 
 <P><STRONG><a name="[223]"></a>get_ldnumber</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, ff.o(i.get_ldnumber))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = get_ldnumber
 </UL>
-<BR>[Called By]<UL><LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
-<LI><a href="#[222]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+<BR>[Called By]<UL><LI><a href="#[222]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mount
+<LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
 </UL>
 
 <P><STRONG><a name="[226]"></a>ld_clust</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, ff.o(i.ld_clust))
@@ -4824,11 +4824,11 @@ Local Symbols
 <P><STRONG><a name="[1ed]"></a>ld_dword</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ff.o(i.ld_dword))
 <BR><BR>[Called By]<UL><LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_opendir
 <LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
+<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[21b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;follow_path
 <LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_fs
-<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
 </UL>
 
 <P><STRONG><a name="[225]"></a>ld_qword</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, ff.o(i.ld_qword))
@@ -4841,37 +4841,37 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[1ec]"></a>ld_word</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, ff.o(i.ld_word))
-<BR><BR>[Called By]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<BR><BR>[Called By]<UL><LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pick_lfn
+<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_clust
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_find
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmp_lfn
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_fs
-<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pick_lfn
-<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
-<LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_clust
 </UL>
 
 <P><STRONG><a name="[209]"></a>load_obj_dir</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, ff.o(i.load_obj_dir))
 <BR><BR>[Stack]<UL><LI>Max Depth = 460<LI>Call Chain = load_obj_dir &rArr; load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<BR>[Calls]<UL><LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
 </UL>
-<BR>[Called By]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
-<LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<BR>[Called By]<UL><LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 
 <P><STRONG><a name="[205]"></a>load_xdir</STRONG> (Thumb, 220 bytes, Stack size 32 bytes, ff.o(i.load_xdir))
 <BR><BR>[Stack]<UL><LI>Max Depth = 444<LI>Call Chain = load_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[22c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xdir_sum
+<BR>[Calls]<UL><LI><a href="#[22c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xdir_sum
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cpy
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_word
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
-<BR>[Called By]<UL><LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_read
-<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
+<BR>[Called By]<UL><LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_obj_dir
+<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_read
 </UL>
 
 <P><STRONG><a name="[1ee]"></a>mem_cmp</STRONG> (Thumb, 36 bytes, Stack size 20 bytes, ff.o(i.mem_cmp))
@@ -4884,23 +4884,23 @@ Local Symbols
 <P><STRONG><a name="[20c]"></a>mem_cpy</STRONG> (Thumb, 26 bytes, Stack size 12 bytes, ff.o(i.mem_cpy))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = mem_cpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gen_numname
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
-<LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_write
+<BR>[Called By]<UL><LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_write
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
+<LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gen_numname
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 
 <P><STRONG><a name="[1f9]"></a>mem_set</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, ff.o(i.mem_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mem_set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
+<BR>[Called By]<UL><LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
+<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_fs
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_xdir
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_name
-<LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
-<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_fs
 </UL>
 
 <P><STRONG><a name="[1ea]"></a>move_window</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, ff.o(i.move_window))
@@ -4910,6 +4910,10 @@ Local Symbols
 <LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_window
 </UL>
 <BR>[Called By]<UL><LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
+<LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
+<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
+<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_volume
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_bitmap
@@ -4919,10 +4923,6 @@ Local Symbols
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_alloc
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_fs
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;change_bitmap
-<LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
-<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
-<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
-<LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;load_xdir
 </UL>
 
 <P><STRONG><a name="[206]"></a>pick_lfn</STRONG> (Thumb, 130 bytes, Stack size 32 bytes, ff.o(i.pick_lfn))
@@ -4941,9 +4941,9 @@ Local Symbols
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ld_dword
 </UL>
-<BR>[Called By]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
+<BR>[Called By]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_fat_chain
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_chain
-<LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remove_chain
 </UL>
 
 <P><STRONG><a name="[20e]"></a>put_lfn</STRONG> (Thumb, 124 bytes, Stack size 32 bytes, ff.o(i.put_lfn))
@@ -4957,9 +4957,9 @@ Local Symbols
 <P><STRONG><a name="[220]"></a>remove_chain</STRONG> (Thumb, 266 bytes, Stack size 40 bytes, ff.o(i.remove_chain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 388<LI>Call Chain = remove_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
+<BR>[Calls]<UL><LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;change_bitmap
-<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
 </UL>
 <BR>[Called By]<UL><LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
@@ -4987,34 +4987,34 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = st_qword
 </UL>
 <BR>[Called By]<UL><LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 <LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 
 <P><STRONG><a name="[1fc]"></a>st_word</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, ff.o(i.st_word))
-<BR><BR>[Called By]<UL><LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_xdir
-<LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<BR><BR>[Called By]<UL><LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_fs
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;store_xdir
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_clust
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_lfn
 <LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;put_fat
+<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_xdir
 </UL>
 
 <P><STRONG><a name="[20b]"></a>store_xdir</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, ff.o(i.store_xdir))
 <BR><BR>[Stack]<UL><LI>Max Depth = 436<LI>Call Chain = store_xdir &rArr; dir_next &rArr; create_chain &rArr; get_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlocks &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; SDIO_Send_Data_Cfg
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
-<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[22c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xdir_sum
+<BR>[Calls]<UL><LI><a href="#[22c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xdir_sum
 <LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_word
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
 <LI><a href="#[20c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_cpy
+<LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
 <BR>[Called By]<UL><LI><a href="#[224]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
 <LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_sync
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_register
 </UL>
 
 <P><STRONG><a name="[202]"></a>sum_sfn</STRONG> (Thumb, 32 bytes, Stack size 12 bytes, ff.o(i.sum_sfn))
@@ -5044,10 +5044,10 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
-<LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
+<BR>[Called By]<UL><LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_mkdir
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_fs
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_window
+<LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_next
 </UL>
 
 <P><STRONG><a name="[216]"></a>validate</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, ff.o(i.validate))

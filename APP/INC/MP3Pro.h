@@ -39,6 +39,7 @@ typedef struct
 	u8 (*PlayerIdle)(void);
 	char *fn;
 }_MP3Player;
+
 extern u32 TASKID_MP3TASK;
 extern _MP3Player MP3Player;
 

@@ -16,9 +16,9 @@ void Lcd_SetSpiSpeed(u8 SpeedSet)
 //返回值:读取到的字节
 u16 Lcd_ReadWriteByte(u16 TxData)
 {		 			 
-	while((SPI5->SR&1<<1)==0);		//等待发送区空 
+	while((SPI5->SR&1<<1)==0){}		//等待发送区空 
 	SPI5->DR=TxData;	 	  		//发送一个byte  
-	while((SPI5->SR&1<<0)==0);		//等待接收完一个byte  
+	while((SPI5->SR&1<<0)==0){}		//等待接收完一个byte
  	return SPI5->DR;          		//返回收到的数据				    
 }
 

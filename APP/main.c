@@ -35,9 +35,9 @@ void SdInit(void)
 	exfuns_init();														//为FATFS分配内存
 	mf_mount((u8*)"0:/");												//挂载SD卡
 	CheckLogDirs();														//检查SD卡中是否存在日志文件夹，没有则新建
-	SetTaskDelay(TASKID_RUNLED,0,0,0,0,500);
+	SetTaskDelay(TASKID_RUNLED,0,0,0,0,500);							//SD卡挂载成功，运行指示灯秒闪
 //	TASKID_MP3TASK = CreateTask("Mp3Pro",0,0,0,0,0,MP3Pro);				//创建MP3播放任务
-	DelTask(&TASKID_SDINIT);
+	DelTask(&TASKID_SDINIT);											//删除SD卡初始化任务
 }
 
 int main(void)
@@ -55,7 +55,7 @@ int main(void)
 	ReadDefaultConfig();												//读取默认配置
 //	LcdInit();															//初始化LCD spi接口，初始化EMWIN
 	TASKID_SDINIT = CreateTask("SD卡初始化",0,0,0,0,500,SdInit);		//SD卡初始化任务
-	TASKID_RUNLED = CreateTask("运行指示灯",0,0,0,0,100,RunLedTask); 		//运行指示灯任务
+	TASKID_RUNLED = CreateTask("运行指示灯",0,0,0,0,100,RunLedTask); 	//运行指示灯任务
 	CreateTask("更新时钟",0,0,0,1,0,FreshSysRtc);						//获取实时时钟
 	TASKID_NETPRO = CreateTask("网络数据收发",0,0,0,0,0,NetPro);		//网络数据收发及处理任务
 	TASKID_CANPRO = CreateTask("CAN数据收发",0,0,0,0,0,CanPro);			//CAN数据收发及处理任务

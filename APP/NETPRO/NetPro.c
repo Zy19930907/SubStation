@@ -24,8 +24,12 @@ void TcpSocket0Recv(u8 *buf,u16 len)
 //TCP端口1接收到数据
 void TcpSocket1Recv(u8 *buf,u16 len)
 {
+	u32 fram;
 //	SetPcLinkStatus(TCPSOCKET1,1);
 	NetManger.SocketTick[TCPSOCKET1] = SYS_TICK;
+	fram = *(u32*)buf;
+	if(fram == 0xAA55AA55)
+		
 	HandleNetData(TCPSOCKET1,buf,len,0);
 }
 //TCP端口2接收到数据
@@ -77,7 +81,6 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 			UpdateBootLoader(iapServerIp);//固件更新服务器地址存入EEPROM，引导程序读取后连接
 			BootCmdDeal();
 		}
-		
 		Udp.Tick = SYS_TICK;
 		Udp.Status = UDPRECV;
 	}
@@ -206,7 +209,7 @@ static inline void SerchCmdDeal(void)
 	cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
 	cJSON_AddNullToObject(Ack,"data");//无数据域，返回空
 	cJSON_AddStringToObject(Ack,"position","三采区变电所综合分站");//分站安装位置
-	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);
+	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);//将JSON对象转换为byte数组
 	Udp.cmdType = 0x01;//UDP命令类型
 	cJSON_Delete(Ack);//释放Json对象占用的内存
 }

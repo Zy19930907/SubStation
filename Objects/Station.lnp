@@ -11,6 +11,7 @@
 ".\objects\keypro.o"
 ".\objects\mp3pro.o"
 ".\objects\tolkpro.o"
+".\objects\boardcastcmd.o"
 ".\objects\mcu.o"
 ".\objects\can.o"
 ".\objects\uart.o"
