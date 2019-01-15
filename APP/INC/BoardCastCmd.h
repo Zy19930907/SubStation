@@ -3,4 +3,6 @@
 
 #include "Public.h"
 
+void HandleBoardCastCmd(u8 *buf,u16 len,u8 sn);
+
 #endif

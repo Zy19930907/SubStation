@@ -365,5 +365,6 @@ extern _Can Can;
 void CanxInit(u8 canx);
 void CanSendData(u8 Canx,u32 ID,u8 *buf,u8 len);
 void CanRecvData(u8 canx);
+u8 CanBusBelong(u8 addr);
 
 #endif

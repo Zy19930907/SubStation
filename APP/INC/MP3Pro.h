@@ -26,7 +26,6 @@ typedef struct
 	FILINFO fileinfo;
 	char MusicPath[100];
 	FIL MusicFil;
-	u8 lastFlag;
 	u8 Buf[MP3BUFLEN];
 	u16 R;
 	u8 Volum;
@@ -35,6 +34,7 @@ typedef struct
 	u32 PlayCnt;
 	u16 SongRemain;
 	u16 SendLen;
+	u8 lastFlag;
 	u8 (*SendByte)(u8 data);
 	u8 (*PlayerIdle)(void);
 	char *fn;
@@ -49,5 +49,8 @@ void MP3_WifiCmdDeal(u8 *buf,u16 len);
 void CanMp3Handler(u32 ID,u8 *buf,u8 len);
 void ResetMp3Player(void);
 void SetVolum(void);
+void StartPlayMusic(u16 musicIndex);
+void StopMusic(void);
+void PauseMusic(void);
 
 #endif

@@ -2,7 +2,7 @@
 #define __SYS_H	 
 #include <stm32f4xx.h>
 
-#define SYSMAINCLOCK			200		//系统主频
+#define SYSMAINCLOCK			180		//系统主频
 ///////////////////////////////////////////////////////////////////////////////////
 //定义一些常用的数据类型短关键字 
 typedef uint64_t  u64;

@@ -11,6 +11,12 @@ void VS1003_IO_Init(void)
 {
 	
 	VS1003IOCLKEN;
+	
+	//VOICE_CHOICE
+	VS1003_EN_PORT->MODER &= ~((u32)0x03 << (VS1003_EN_PIN << 1));//清除原有配置
+	VS1003_EN_PORT->MODER |=  ((u32)0x01 << (VS1003_EN_PIN << 1));//通用输出模式
+	VS1003_EN_PORT->OSPEEDR |= ((u32)0x03 << (VS1003_EN_PIN << 1));//80MHz
+	VS1003_EN_PORT->PUPDR |= ((u32)0x01 << (VS1003_EN_PIN << 1));//上拉
 	//RST
 	VS1003_RST_PORT->MODER &= ~((u32)0x03 << (VS1003_RST_PIN << 1));//清除原有配置
 	VS1003_RST_PORT->MODER |=  ((u32)0x01 << (VS1003_RST_PIN << 1));//通用输出模式

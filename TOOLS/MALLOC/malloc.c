@@ -90,7 +90,7 @@ u32 my_mem_malloc(u8 memx,u32 size)
 //memx:所属内存块
 //offset:内存地址偏移
 //返回值:0,释放成功;1,释放失败;  
-static inline u8 my_mem_free(u8 memx,u32 offset)  
+u8 my_mem_free(u8 memx,u32 offset)  
 {  
     int i;  
     if(!mallco_dev.memrdy[memx])//未初始化,先执行初始化

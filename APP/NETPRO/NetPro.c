@@ -4,8 +4,8 @@
 
 void UdpPro(void);
 void NetSendData(u8 socketn,u8 *buf,u16 len);
-static inline void SerchCmdDeal(void);
-static inline void BootCmdDeal(void);
+void SerchCmdDeal(void);
+void BootCmdDeal(void);
 
 W5500SOCKET* Sockets[MAXSOCKETCNT];
 
@@ -29,8 +29,9 @@ void TcpSocket1Recv(u8 *buf,u16 len)
 	NetManger.SocketTick[TCPSOCKET1] = SYS_TICK;
 	fram = *(u32*)buf;
 	if(fram == 0xAA55AA55)
-		
-	HandleNetData(TCPSOCKET1,buf,len,0);
+		HandleBoardCastCmd(buf,len,TCPSOCKET1);
+	else
+		HandleNetData(TCPSOCKET1,buf,len,0);
 }
 //TCP端口2接收到数据
 void TcpSocket2Recv(u8 *buf,u16 len)
@@ -194,7 +195,7 @@ void UdpPro(void)
 }
 
 //处理设备搜索指令
-static inline void SerchCmdDeal(void)
+void SerchCmdDeal(void)
 {
 	cJSON* Ack;
 	char ipAddr[30];
@@ -215,7 +216,7 @@ static inline void SerchCmdDeal(void)
 }
 
 //处理进入引导程序指令
-static inline void BootCmdDeal(void)
+void BootCmdDeal(void)
 {
 	cJSON* Ack;
 	Ack = cJSON_CreateObject();//创建Json对象

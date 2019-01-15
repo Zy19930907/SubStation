@@ -9,7 +9,6 @@
 #include "malloc.h"
 #include "SD2068.h"
 #include "Mcu.h"
-#include "Uart.h"
 #include "sdram.h"
 #include "sdio_sdcard.h"
 #include "cJSON.h"
@@ -36,6 +35,7 @@
 #include "TolkPro.h"
 #include "MP3Pro.h"
 #include "CrcMaker.h"
+#include "BoardCastCmd.h"
 //UI
 #include "GUI.h"
 #include "WM.h"
@@ -163,6 +163,7 @@ typedef struct
 	
 	u8 ShowFlag;//超限或断线时标记该传感器显示颜色
 	u8 MusicFlag;//音乐播放标志
+	u8 BoardCastGroup;//广播组
 }_Sensor;
 
 typedef struct

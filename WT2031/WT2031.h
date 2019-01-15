@@ -7,6 +7,12 @@
 typedef void(*WT2031Handler)(u8 *buf,u8 len);
 #define MAXWT2031OBSERVER			3
 //WT2031Òý½Å¶¨Òå
+//SHDN
+#define SHDN_PORT					GPIOC
+#define SHDN_PIN					7
+//MUTE
+#define MUTE_PORT					GPIOA
+#define MUTE_PIN					8
 //RST
 #define WT2031_RSTPROT				GPIOI
 #define WT2031_RSTPIN				6
