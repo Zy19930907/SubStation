@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "rng.h"
 
-u8 ConfigBuf[50];
+u8 ConfigBuf[200];
 
 void WriteConfig(u16 addr, u8 *buf, u16 len)
 {
@@ -246,6 +246,64 @@ void ReadNetWarn(u8 *warn)
     }
 }
 
+void ReadBoardCastGroupConfg(void)
+{
+	u64 configL=0,configH=0;
+	u8 i,j;
+	 if(ConfigCheck(BoardCastGroupConfigAddr, 130))
+    {
+		for(i=0;i<8;i++)
+			{
+				configL = 0;
+				configH = 0;
+				for(j=0;j<8;j++)
+				{
+					configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
+					configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
+				}
+				
+				for(j=0;j<64;j++)
+				{
+					if((configL >> j) & 0x01)
+						Device[j].BoardCastGroup |= (1<<i);
+					else
+						Device[j].BoardCastGroup &= ~(1<<i);
+					
+					if((configH >> j) & 0x01)
+						Device[64+j].BoardCastGroup |= (1<<i);
+					else
+						Device[64+j].BoardCastGroup &= ~(1<<i);
+				}
+			}
+    }
+    else if(ConfigCheck(BK_BoardCastGroupConfigAddr, 130))
+    {
+			for(i=0;i<8;i++)
+			{
+				configL = 0;
+				configH = 0;
+				for(j=0;j<8;j++)
+				{
+					configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
+					configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
+				}
+				
+				for(j=0;j<64;j++)
+				{
+					if((configL >> j) & 0x01)
+						Device[j].BoardCastGroup |= (1<<i);
+					else
+						Device[j].BoardCastGroup &= ~(1<<i);
+					
+					if((configH >> j) & 0x01)
+						Device[64+j].BoardCastGroup |= (1<<i);
+					else
+						Device[64+j].BoardCastGroup &= ~(1<<i);
+				}
+			}
+    }	
+}
+
 void UpdateNetAddr(u8 Addr)
 {
     *ConfigBuf = Addr;
@@ -362,6 +420,14 @@ void UpdateNetWarn(u8 warn)
     else
         ConfigBuf[0] = 0x00;
     WriteConfig(NetWarnAddr, ConfigBuf, 1);
+}
+
+void UpdateBoardCastGroupConfig(u8 *config)
+{
+	u8 i;
+    for(i = 0; i < 128; i++)
+        *(ConfigBuf + i) = *(config + i);
+	WriteConfig(BoardCastGroupConfigAddr, ConfigBuf, 128);
 }
 
 void UpdatePowerInfo(u8 addr)
@@ -508,6 +574,7 @@ void ReadDefaultConfig(void)
     UpdateResetTimes(Sys.ResetTimes);
     WriteSensorRecord(0, NETRESET);
     ReadDefaultInit();           //读取初始化信息
+	ReadBoardCastGroupConfg();
 }
 
 // 查看设备的有效性

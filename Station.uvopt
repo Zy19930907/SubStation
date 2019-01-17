@@ -142,7 +142,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>pp?燩\wpp?燩\wpp?</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -184,25 +183,30 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>185</LineNumber>
+          <LineNumber>10</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134259286</Address>
+          <Address>134236488</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\鑿茶帿\缁煎悎鍒嗙珯\SubStation\APP\NETPRO\NetPro.c</Filename>
+          <Filename>D:\鑿茶帿\缁煎悎鍒嗙珯\SubStation\APP\BOARDCASTCMD\BoardCastCmd.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Station\APP/NETPRO/NetPro.c\185</Expression>
+          <Expression>\\Station\APP/BOARDCASTCMD/BoardCastCmd.c\10</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Net,0x0A</ItemText>
+          <ItemText>Net,0x10</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Device</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -216,7 +220,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>0</SubType>
-          <ItemText>WT2031.RxFram</ItemText>
+          <ItemText>buf</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -283,7 +287,7 @@
 
   <Group>
     <GroupName>SYSTEM</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

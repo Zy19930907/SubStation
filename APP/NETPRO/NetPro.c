@@ -17,9 +17,14 @@ _Udp Udp;
 //TCP端口0接收到数据
 void TcpSocket0Recv(u8 *buf,u16 len)
 {	
+	u32 fram;
 //	SetPcLinkStatus(TCPSOCKET0,1);
 	NetManger.SocketTick[TCPSOCKET0] = SYS_TICK;
-	HandleNetData(TCPSOCKET0,buf,len,0);
+	fram = *(u32*)buf;
+	if(fram == 0xAA55AA55)
+		HandleBoardCastCmd(buf,len,TCPSOCKET0);
+	else
+		HandleNetData(TCPSOCKET0,buf,len,0);
 }
 //TCP端口1接收到数据
 void TcpSocket1Recv(u8 *buf,u16 len)
@@ -36,9 +41,14 @@ void TcpSocket1Recv(u8 *buf,u16 len)
 //TCP端口2接收到数据
 void TcpSocket2Recv(u8 *buf,u16 len)
 {
+	u32 fram;
 //	SetPcLinkStatus(TCPSOCKET2,1);
 	NetManger.SocketTick[TCPSOCKET2] = SYS_TICK;
-	HandleNetData(TCPSOCKET2,buf,len,0);
+	fram = *(u32*)buf;
+	if(fram == 0xAA55AA55)
+		HandleBoardCastCmd(buf,len,TCPSOCKET2);
+	else
+		HandleNetData(TCPSOCKET2,buf,len,0);
 }
 //UDP端口0接收到数据
 void UdpSocket0Recv(u8 *buf,u16 len)

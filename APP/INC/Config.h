@@ -24,26 +24,29 @@
 #define NetUdpIpAddr            	74
 #define BiSuoFilterTimeAddr     	82
 #define NetWarnAddr             	88
-#define BaseInfoAddr            	128
+#define BoardCastGroupConfigAddr	91
+#define BaseInfoAddr            	300
 //配置信息备份表
-#define BK_NetAddrAddr             BACKUPBASEADDR+NetAddrAddr
-#define BK_NetIpAddr               BACKUPBASEADDR+NetIpAddr           
-#define BK_FactoryTimeAddr         BACKUPBASEADDR+FactoryTimeAddr
-#define BK_ResetTimesAddr          BACKUPBASEADDR+ResetTimesAddr
-#define BK_GateWayIpAddr           BACKUPBASEADDR+GateWayIpAddr
-#define BK_ReadPointerAddr         BACKUPBASEADDR+ReadPointerAddr
-#define BK_WritePointerAddr        BACKUPBASEADDR+WritePointerAddr
-#define BK_InitInfoAddr            BACKUPBASEADDR+InitInfoAddr
-#define BK_InitLenAddr             BACKUPBASEADDR+InitLenAddr
-#define BK_InitCrcAddr             BACKUPBASEADDR+InitCrcAddr
-#define BK_MacBufAddr              BACKUPBASEADDR+MacBufAddr
-#define BK_FilterTimeAddr          BACKUPBASEADDR+FilterTimeAddr
-#define BK_BootLoaderAddr          BACKUPBASEADDR+BootLoaderAddr
-#define BK_NetCrcCntAddr           BACKUPBASEADDR+NetCrcCntAddr
-#define BK_NetUdpIpAddr            BACKUPBASEADDR+NetUdpIpAddr
-#define BK_BiSuoFilterTimeAddr     BACKUPBASEADDR+BiSuoFilterTimeAddr
-#define BK_NetWarnAddr             BACKUPBASEADDR+NetWarnAddr
-#define BK_BaseInfoAddr            BACKUPBASEADDR+BaseInfoAddr
+#define BK_NetAddrAddr             	BACKUPBASEADDR+NetAddrAddr
+#define BK_NetIpAddr               	BACKUPBASEADDR+NetIpAddr           
+#define BK_FactoryTimeAddr        	BACKUPBASEADDR+FactoryTimeAddr
+#define BK_ResetTimesAddr         	BACKUPBASEADDR+ResetTimesAddr
+#define BK_GateWayIpAddr           	BACKUPBASEADDR+GateWayIpAddr
+#define BK_ReadPointerAddr         	BACKUPBASEADDR+ReadPointerAddr
+#define BK_WritePointerAddr        	BACKUPBASEADDR+WritePointerAddr
+#define BK_InitInfoAddr            	BACKUPBASEADDR+InitInfoAddr
+#define BK_InitLenAddr             	BACKUPBASEADDR+InitLenAddr
+#define BK_InitCrcAddr             	BACKUPBASEADDR+InitCrcAddr
+#define BK_MacBufAddr              	BACKUPBASEADDR+MacBufAddr
+#define BK_FilterTimeAddr          	BACKUPBASEADDR+FilterTimeAddr
+#define BK_BootLoaderAddr          	BACKUPBASEADDR+BootLoaderAddr
+#define BK_NetCrcCntAddr           	BACKUPBASEADDR+NetCrcCntAddr
+#define BK_NetUdpIpAddr            	BACKUPBASEADDR+NetUdpIpAddr
+#define BK_BiSuoFilterTimeAddr     	BACKUPBASEADDR+BiSuoFilterTimeAddr
+#define BK_NetWarnAddr             	BACKUPBASEADDR+NetWarnAddr
+#define BK_BoardCastGroupConfigAddr	BACKUPBASEADDR+BoardCastGroupConfigAddr
+#define BK_BaseInfoAddr            	BACKUPBASEADDR+BaseInfoAddr
+
 
 void ReadNetAddr(u8 *Addr);
 void ReadFactoryTime(u8 *FtyTime);
@@ -80,12 +83,13 @@ void UpdateInitInfo(u8 *buf,u16 len);
 
 void WriteRecord(u16 addr,u8 *buf,u16 len);
 u8 ReadRecord(u16 addr,u8 *buf);
-
-
 void ReadDefaultConfig(void);
 void ReadDefaultInit(void);
 void ReadInitInfo(u8 addr);
 void CalDeviceCrc(void);
 void ReadDeviceDefine(void);
 void UpdateDeviceInfo(void);
+void ReadBoardCastGroupConfg(void);
+void UpdateBoardCastGroupConfig(u8 *config);
+
 #endif

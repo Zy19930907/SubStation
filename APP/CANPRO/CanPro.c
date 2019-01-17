@@ -505,7 +505,14 @@ void AckFunc(u8 index, u8 cmd, u8 DestAddr)
     if(Sys.Delay)                                  // 倒计时未结束，不发控制指令
         CanSendData(index, Can.ID, &buf[0], 0);
     else
-        CanSendData(index, Can.ID, &buf[0], 1);
+	{
+		if(Device[DestAddr - 1].Name == 0x28)
+		{
+			buf[1] = Device[DestAddr-1].BoardCastGroup;
+			CanSendData(index, Can.ID, &buf[0], 2);
+		}else
+			CanSendData(index, Can.ID, &buf[0], 1);
+	}
 #endif
 }
 
@@ -772,7 +779,7 @@ void HandleCanData(u32 ID, u8 CanIndex)
         if(Device[addr - 1].Warn & 0x7F)
 			Device[addr - 1].Status |= 0x02;
         Device[addr - 1].Buf[0] = Can.Buf[0] & 0x7F;
-        Device[addr - 1].Buf[1] = 0;
+        Device[addr - 1].Buf[1] = Can.Buf[1];
         AckFunc(CanIndex, ACK, addr);
         CheckCrc(addr, Can.Buf[5], 1);
         break;
