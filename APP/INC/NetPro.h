@@ -25,6 +25,7 @@ typedef struct
 	u8* ackData;
 	u32 Tick;
 	u8 cmdType;
+	u16 remotePort;
 }_Udp;
 
 typedef enum

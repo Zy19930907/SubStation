@@ -62,7 +62,7 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 	cJSON* pArray;
 	
 	NetManger.SocketTick[UDPSOCKET1] = SYS_TICK;
-	
+	Udp.remotePort = Net.SocketSelect->remotePort;
 	BootCmd = cJSON_Parse((char*)buf);
 	if(BootCmd != 0)
 	{
@@ -182,7 +182,7 @@ void UdpPro(void)
 			break;
 			
 		case UDPACK:
-			Net.SendUdpData(Net.SocketSelect,Udp.ackData,strlen((char*)Udp.ackData),Net.SocketSelect->remoteIP,12121);
+			Net.SendUdpData(&Net.Sockets[UDPSOCKET1],Udp.ackData,strlen((char*)Udp.ackData),Net.SocketSelect->remoteIP,Udp.remotePort+1);
 			myfree(SRAMIN,Udp.ackData);
 			if(Udp.cmdType == 0x02)
 			{
