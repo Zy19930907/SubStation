@@ -2,9 +2,7 @@
 //帧头55AA55AA 帧长度XX XX 指令码XX 指令长度XX XX 指令数据域
 void HandleBoardCastCmd(u8 *buf,u16 len,u8 sn)
 {
-	u8 i,j,destAddr;
-	u16 framLen,cmdLen,musicIndex,addr;
-	
+	u16 framLen,musicIndex;
 	_Can cmdCan;
 	
 	if(!CheckCrc16(buf,len-2,0))//crc校验错误
@@ -13,8 +11,6 @@ void HandleBoardCastCmd(u8 *buf,u16 len,u8 sn)
 	framLen = *(u16*)&buf[4];
 	if(framLen != len)//帧长度错误
 		return;
-	
-	cmdLen = *(u16*)&buf[7];//指令数据域长度
 	
 	switch(buf[6])
 	{
@@ -36,7 +32,7 @@ void HandleBoardCastCmd(u8 *buf,u16 len,u8 sn)
 			break;
 		
 		case 0x04://单广播对讲
-			cmdCan.ID = MakeFeimoCanId(0,0x09,0,0,0x28,buf[9]);
+			cmdCan.ID = MakeFeimoCanId(0,0x68,0,0,0x28,buf[9]);
 			cmdCan.Buf[0] = 0x04;//单播指令
 			BufCmp(&cmdCan.Buf[1],&buf[10],6);
 			cmdCan.Len = 7;
@@ -47,11 +43,18 @@ void HandleBoardCastCmd(u8 *buf,u16 len,u8 sn)
 			
 			break;
 		
-		case 0x06://对讲组播
+		case 0x06://暂停-继续播放
+			cmdCan.ID = MakeFeimoCanId(0,0x67,0,0,0x28,buf[9]);
+			cmdCan.Buf[0] = buf[10];//单播指令
+			cmdCan.Len = 1;
+			CanSendData(CanBusBelong(buf[9]),cmdCan.ID,cmdCan.Buf,cmdCan.Len);
+			break;
+		
+		case 0x07://对讲组播
 			
 			break;
 		
-		case 0x07://配置广播组
+		case 0x08://配置广播组
 			UpdateBoardCastGroupConfig(&buf[9]);
 			ReadBoardCastGroupConfg();
 			break;

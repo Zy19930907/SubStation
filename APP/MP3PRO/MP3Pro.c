@@ -36,7 +36,6 @@ void SendMP3Pack(void)
 void MP3Pro(void)
 {
 	UINT t;
-	FRESULT res;
 	
 	switch(MP3Player.Status)
 	{
@@ -85,16 +84,16 @@ void MP3Pro(void)
 			break;
 		
 		case MP3READSONG:
-			res = f_open(&MP3Player.MusicFil,MP3Player.MusicPath,FA_READ);
-			res = f_lseek(&MP3Player.MusicFil,MP3Player.PlayCnt*MP3BUFLEN);
+			f_open(&MP3Player.MusicFil,MP3Player.MusicPath,FA_READ);
+			f_lseek(&MP3Player.MusicFil,MP3Player.PlayCnt*MP3BUFLEN);
 			if(MP3Player.PlayCnt < MP3Player.SongCnt)
 			{
-				res = f_read(&MP3Player.MusicFil,&MP3Player.Buf[0],MP3BUFLEN,&t);
+				f_read(&MP3Player.MusicFil,&MP3Player.Buf[0],MP3BUFLEN,&t);
 				MP3Player.Status = MP3PLAY;
 				MP3Player.PlayCnt++;
 			}else if((MP3Player.PlayCnt == MP3Player.SongCnt) && (MP3Player.SongRemain != 0))
 			{
-				res = f_read(&MP3Player.MusicFil,&MP3Player.Buf[0],MP3Player.SongRemain,&t);
+				f_read(&MP3Player.MusicFil,&MP3Player.Buf[0],MP3Player.SongRemain,&t);
 				memset(&MP3Player.Buf[MP3Player.SongRemain],0,(MP3BUFLEN - MP3Player.SongRemain));//不足一包部分填0
 				MP3Player.Status = MP3PLAY;
 				MP3Player.lastFlag = 1;

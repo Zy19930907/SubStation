@@ -94,14 +94,16 @@ void CheckTriggerStatus(void)
 void CanSendLianDongInfo(void)
 {
 	u8 i,j;
-	u8 buf[1];
+	u8 buf[8];
 	for(i = 0;i < MaxDeviceNum;i ++)
 	{
 		if((Device[i].Warn & 0x80) && (!(Device[i].Status & 0x80)))        // ÐèÒª·¢ËÍ
 		{
 			Can.ID = (u32) MakeFramID(0,0x39,i+1);
 			buf[0] = Device[i].Warn & 0x7F;
-			CanSendData(CanBusBelong(i+1),Can.ID,&buf[0],1);
+			buf[1] = Excute[j].TriggerAddr;
+			buf[2] = Device[i].Name;
+			CanSendData(CanBusBelong(i+1),Can.ID,&buf[0],3);
 			for(j = 0; j < MaxTriggerNum; j ++)
 			{
 				if(Excute[j].TriggerAddr == 0)

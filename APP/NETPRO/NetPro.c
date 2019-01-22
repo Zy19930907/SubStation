@@ -116,7 +116,7 @@ void CreatUserPort(void)
 void NetOfflineDeal(void)
 {
 	u8 i;
-	for(i=0;i<2;i++)
+	for(i=0;i<3;i++)
 	{
 		if(MsTickDiff(NetManger.SocketTick[i]) >= NETOFFLINETIME)
 		{
