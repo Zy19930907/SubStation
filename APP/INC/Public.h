@@ -117,6 +117,7 @@ typedef struct
     u16 PauseSec;
     u16 FilterTime;
     u16 BiSuoTime;
+	char position[100];
 	char RtcStr[50];
 }_Sys;
 extern _Sys Sys;

@@ -5,6 +5,7 @@
 void UdpPro(void);
 void NetSendData(u8 socketn,u8 *buf,u16 len);
 void SerchCmdDeal(void);
+void GetDevInfoCmdDeal(void);
 void BootCmdDeal(void);
 
 W5500SOCKET* Sockets[MAXSOCKETCNT];
@@ -91,6 +92,11 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 			}
 			UpdateBootLoader(iapServerIp);//固件更新服务器地址存入EEPROM，引导程序读取后连接
 			BootCmdDeal();
+		}else if(BufCmp((u8*)pItem->valuestring,(u8*)"GETDEVINFO",10))//获取分站信息
+		{
+			pItem = cJSON_GetObjectItem(BootCmd,"position");
+			strcpy(Sys.position,pItem->valuestring);
+			GetDevInfoCmdDeal();
 		}
 		Udp.Tick = SYS_TICK;
 		Udp.Status = UDPRECV;
@@ -219,12 +225,33 @@ void SerchCmdDeal(void)
 	sprintf(macAddr,"%02x:%02x:%02x:%02x:%02x:%02x",Net.MacAddr[0],Net.MacAddr[1],Net.MacAddr[2],Net.MacAddr[3],Net.MacAddr[4],Net.MacAddr[5]);
 	cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
 	cJSON_AddNullToObject(Ack,"data");//无数据域，返回空
-	cJSON_AddStringToObject(Ack,"position","三采区变电所综合分站");//分站安装位置
+	cJSON_AddStringToObject(Ack,"position",Sys.position);//分站安装位置
 	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);//将JSON对象转换为byte数组
 	Udp.cmdType = 0x01;//UDP命令类型
 	cJSON_Delete(Ack);//释放Json对象占用的内存
 }
 
+
+//处理设备搜索指令
+void GetDevInfoCmdDeal(void)
+{
+	cJSON* Ack;
+	char ipAddr[30];
+	char macAddr[30];
+	
+	Ack = cJSON_CreateObject();//创建Json对象
+	cJSON_AddStringToObject(Ack,"cmdType","AckGetDevInfo");//数据类型，应答设备搜索
+	cJSON_AddStringToObject(Ack,"softVer",Version);//分站软件版本
+	sprintf(ipAddr,"%d.%d.%d.%d",Net.localIp[0],Net.localIp[1],Net.localIp[2],Net.localIp[3]);
+	cJSON_AddStringToObject(Ack,"ipAddr",ipAddr);//分站IP地址
+	sprintf(macAddr,"%02x:%02x:%02x:%02x:%02x:%02x",Net.MacAddr[0],Net.MacAddr[1],Net.MacAddr[2],Net.MacAddr[3],Net.MacAddr[4],Net.MacAddr[5]);
+	cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
+	cJSON_AddNullToObject(Ack,"data");//无数据域，返回空
+	cJSON_AddStringToObject(Ack,"position",Sys.position);//分站安装位置
+	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);//将JSON对象转换为byte数组
+	Udp.cmdType = 0x01;//UDP命令类型
+	cJSON_Delete(Ack);//释放Json对象占用的内存
+}
 //处理进入引导程序指令
 void BootCmdDeal(void)
 {

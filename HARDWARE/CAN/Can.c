@@ -318,8 +318,7 @@ void Mcp2515Init(u8 canx)
 {
      u16 tick;
      MCP2515Reset(canx);
-     tick = SYS_TICK;
-     while(MsTickDiff(tick) < 10);
+     delay_ms(10);
 // 器件在重新复位或者上电的时候，都会自动进入配置模式。此句可以省掉     
      WriteRegCan(canx,CANCTRL,CONFIG_MODE);    // CANCTRL 寄存器，设置为配置模式
      

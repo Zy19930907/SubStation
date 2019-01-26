@@ -55,6 +55,7 @@ void CanPro(void)
         RecvCanData();
         Can.Status = CANCHECKDEV;
         break;
+	//长时间未收到数据重新初始化CAN外设
     case CANCHECKDEV:
 		SetTaskStatus(TASKID_CANPRO,"CAN硬件检测");
         CheckCanDev();
