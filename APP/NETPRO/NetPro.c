@@ -96,6 +96,7 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 		{
 			pItem = cJSON_GetObjectItem(BootCmd,"position");
 			strcpy(Sys.position,pItem->valuestring);
+			UpdateSubStionPosition(Sys.position);
 			GetDevInfoCmdDeal();
 		}
 		Udp.Tick = SYS_TICK;

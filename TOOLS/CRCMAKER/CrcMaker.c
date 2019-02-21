@@ -34,7 +34,7 @@ u8 CheckCrc16(u8 *buf,u16 len,u8 flag)
 	u16 Crc16 = CalCrc16(buf,len,flag);
 	if(flag)
 		Crc16 += (Crc16 >> 8);
-	if((((Crc16 >> 8) & 0xFF) != *(buf+len+1)) ||(Crc16 & 0xFF) != *(buf+len))
+	if((((Crc16 >> 8) & 0xFF) != *(buf+len+1)) || (Crc16 & 0xFF) != *(buf+len))
 		return 0;
 	else
 		return 1;

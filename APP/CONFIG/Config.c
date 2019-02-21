@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "rng.h"
 
-u8 ConfigBuf[200];
+u8 ConfigBuf[1500];
 
 void WriteConfig(u16 addr, u8 *buf, u16 len)
 {
@@ -15,6 +15,7 @@ void WriteConfig(u16 addr, u8 *buf, u16 len)
 
 void WriteCurConfig(u16 addr, u16 len)
 {
+	SetCrc16(ConfigBuf, len-2, 0);
     FramWriteBurstByte(addr, ConfigBuf, len); //配置信息存入主存储区
     FramWriteBurstByte(addr + BACKUPBASEADDR, ConfigBuf, len); //配置信息存入备份存储区
 }
@@ -250,31 +251,31 @@ void ReadBoardCastGroupConfg(void)
 {
 	u64 configL=0,configH=0;
 	u8 i,j;
-	 if(ConfigCheck(BoardCastGroupConfigAddr, 130))
+	if(ConfigCheck(BoardCastGroupConfigAddr, 130))
     {
 		for(i=0;i<8;i++)
+		{
+			configL = 0;
+			configH = 0;
+			for(j=0;j<8;j++)
 			{
-				configL = 0;
-				configH = 0;
-				for(j=0;j<8;j++)
-				{
-					configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
-					configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
-				}
-				
-				for(j=0;j<64;j++)
-				{
-					if((configL >> j) & 0x01)
-						Device[j].BoardCastGroup |= (1<<i);
-					else
-						Device[j].BoardCastGroup &= ~(1<<i);
-					
-					if((configH >> j) & 0x01)
-						Device[64+j].BoardCastGroup |= (1<<i);
-					else
-						Device[64+j].BoardCastGroup &= ~(1<<i);
-				}
+				configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
+				configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
 			}
+			
+			for(j=0;j<64;j++)
+			{
+				if((configL >> j) & 0x01)
+					Device[j].BoardCastGroup |= (1<<i);
+				else
+					Device[j].BoardCastGroup &= ~(1<<i);
+				
+				if((configH >> j) & 0x01)
+					Device[64+j].BoardCastGroup |= (1<<i);
+				else
+					Device[64+j].BoardCastGroup &= ~(1<<i);
+			}
+		}
     }
     else if(ConfigCheck(BK_BoardCastGroupConfigAddr, 130))
     {
@@ -302,6 +303,19 @@ void ReadBoardCastGroupConfg(void)
 				}
 			}
     }	
+}
+
+void ReadSubStationPosition(char *positon)
+{
+    strcpy((char*)positon,(char*)"安装地址未配置");
+    if(ConfigCheck(SUBSTATIONPOSITIONADDR, 102))
+    {
+        BufCopy((u8*)Sys.position,ConfigBuf,100);
+    }
+    else if(ConfigCheck(BK_SUBSTATIONPOSITIONADDR, 102))
+    {
+        BufCopy((u8*)Sys.position,ConfigBuf,100);
+    }
 }
 
 void UpdateNetAddr(u8 Addr)
@@ -437,6 +451,12 @@ void UpdatePowerInfo(u8 addr)
     if(i == 0xFF)
         return;
     Power[i].Addr = 0;
+}
+
+void UpdateSubStionPosition(char* position)
+{
+	BufCopy(ConfigBuf,(u8*)position,100);
+	WriteConfig(SUBSTATIONPOSITIONADDR, ConfigBuf, 100);
 }
 
 void UpdateDeviceInfo(void)
@@ -575,6 +595,7 @@ void ReadDefaultConfig(void)
     WriteSensorRecord(0, NETRESET);
     ReadDefaultInit();           //读取初始化信息
 	ReadBoardCastGroupConfg();
+	ReadSubStationPosition(Sys.position);
 }
 
 // 查看设备的有效性

@@ -18,15 +18,7 @@ void InitCan(void)
         Can.Tick[i] = SYS_TICK;
     }
 }
-//查询方式接收CAN数据
-void RecvCanData(void)
-{
-    u8 i;
-    for(i = 0; i < 6; i++)
-    {
-        CanRecvData(i);
-    }
-}
+
 //检查CAN芯片是否死机
 void CheckCanDev(void)
 {
@@ -43,6 +35,7 @@ void CheckCanDev(void)
 
 void CanPro(void)
 {
+	u8 i;
     switch(Can.Status)
     {
     case CANINIT:
@@ -52,11 +45,11 @@ void CanPro(void)
         break;
     case CANRECV:
 		SetTaskStatus(TASKID_CANPRO,"CAN数据接收");
-        RecvCanData();
+        for(i = 0; i < 6; i++)
+			CanRecvData(i);
         Can.Status = CANCHECKDEV;
         break;
-	//长时间未收到数据重新初始化CAN外设
-    case CANCHECKDEV:
+    case CANCHECKDEV://长时间未收到数据重新初始化CAN外设
 		SetTaskStatus(TASKID_CANPRO,"CAN硬件检测");
         CheckCanDev();
         Can.Status = CANRECV;
@@ -608,6 +601,7 @@ void MakeSensorCanData(u32 ID, u8 CanIndex, u8 addr)
         }
     }
 }
+
 // 依次是 CH4 O2 CO WD
 void MakeMASWirelessSensor(u8 CanIndex, u8 addr)
 {   // CH4

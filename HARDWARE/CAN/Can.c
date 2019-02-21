@@ -291,8 +291,7 @@ u8 SendByteCan(u8 index,u8 val)
 		val <<= 1;
 		SETCANSCK(1);
 		dat <<= 1;
-		if(GETCANMISO)
-			dat++; 
+		dat += GETCANMISO; 
 		SETCANSCK(0);
 	}
 	return dat;
@@ -316,14 +315,13 @@ void MCP2515Reset(u8 canx)
 
 void Mcp2515Init(u8 canx)
 {
-     u16 tick;
      MCP2515Reset(canx);
-     delay_ms(10);
+     delay_ms(1);
 // 器件在重新复位或者上电的时候，都会自动进入配置模式。此句可以省掉     
      WriteRegCan(canx,CANCTRL,CONFIG_MODE);    // CANCTRL 寄存器，设置为配置模式
      
-     WriteRegCan(canx,CNF1,0x18);      // 设置波特率：10K
-//	 WriteRegCan(canx,CNF1,0x31);      // 设置波特率：5K
+//   WriteRegCan(canx,CNF1,0x18);      // 设置波特率：10K
+	 WriteRegCan(canx,CNF1,0x31);      // 设置波特率：5K
      WriteRegCan(canx,CNF2,0xA4);
      WriteRegCan(canx,CNF3, 0x04);
     
@@ -366,7 +364,7 @@ void ReadBurstRegCan(u8 canx,u8 addr,u8 *buf,u8 len)
 	SendByteCan(canx,addr);
 	for(i = 0;i < len;i ++)
 		buf[i] = SendByteCan(canx,0x00);
-	SetCanxCs(canx,0);
+	SetCanxCs(canx,1);
 }
 
 u8 CheckCanTxBufMcp2515(u8 canx)
@@ -442,7 +440,7 @@ void Can1RecvFunc(void)
 		do{
 			Can.Len = (CAN1->sFIFOMailBox[0].RDTR & 0x0000000F);
 			Can.ID = (u32)0x1FFFFFFF & (CAN1->sFIFOMailBox[0].RIR >> 3);
-			Can.ID = (Can.ID >> 18) + ((Can.ID&0x3FFFF)<<11);
+			Can.ID = (Can.ID >> 18) + ((Can.ID & 0x3FFFF)<<11);
 			Can.Buf[0] = CAN1->sFIFOMailBox[0].RDLR&0xFF;
 			Can.Buf[1] = (CAN1->sFIFOMailBox[0].RDLR>>8)&0xFF;
 			Can.Buf[2] = (CAN1->sFIFOMailBox[0].RDLR>>16)&0xFF;
@@ -537,13 +535,16 @@ void Can2RecvFunc(void)
 
 void CanMcp2515RecFunc(u8 canx)
 {
-     u8 flag;
-     flag = ReadRegCan(canx,CANINTF);
-     if(flag & 0x01)
-     {
+	u8 flag;
+	flag = ReadRegCan(canx,CANINTF);
+	if(flag & 0x20)
+	{
+		CanxInit(canx);
+		return;
+	}
+	if(flag & 0x01)
+	{
 		Can.Len = ReadRegCan(canx,RXB0DLC);
-		if(Can.Len >= 8)
-			Can.Len = 8;
 		Can.ID = (ReadRegCan(canx,RXB0SIDL) & 0x03);
 		Can.ID <<=8;
 		Can.ID += ReadRegCan(canx,RXB0EIDH);
@@ -556,12 +557,10 @@ void CanMcp2515RecFunc(u8 canx)
 		ReadBurstRegCan(canx,RXB0D0,Can.Buf,Can.Len);
 		HandleCanData(Can.ID,canx);
 		ModifyReg(canx,CANINTF,0x21,0x00);
-    }
-    if(flag & 0x02)
+	}
+	if(flag & 0x02)
     {
 		Can.Len = ReadRegCan(canx,RXB0DLC);
-		if(Can.Len >= 8)
-			Can.Len = 8;
 		Can.ID = (ReadRegCan(canx,RXB1SIDL) & 0x03);
 		Can.ID <<=8;
 		Can.ID += ReadRegCan(canx,RXB1EIDH);
@@ -639,5 +638,3 @@ void CanRecvData(u8 Canx)
 			break;
 	}
 }
-
-

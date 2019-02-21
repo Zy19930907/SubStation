@@ -3,9 +3,9 @@
 
 #include "Public.h"
 
-#define BACKUPBASEADDR				(1024 * 6) //备份存储区基地址
+#define BACKUPBASEADDR				(1024 * 5) //备份存储区基地址
 
-#define RECORDBASEADDR				1024 * 15
+#define RECORDBASEADDR				1024 * 8
 //配置信息表
 #define NetAddrAddr             	1
 #define NetIpAddr               	4              
@@ -25,7 +25,8 @@
 #define BiSuoFilterTimeAddr     	82
 #define NetWarnAddr             	88
 #define BoardCastGroupConfigAddr	91
-#define BaseInfoAddr            	300
+#define SUBSTATIONPOSITIONADDR		121
+#define BaseInfoAddr            	400
 //配置信息备份表
 #define BK_NetAddrAddr             	BACKUPBASEADDR+NetAddrAddr
 #define BK_NetIpAddr               	BACKUPBASEADDR+NetIpAddr           
@@ -46,7 +47,7 @@
 #define BK_NetWarnAddr             	BACKUPBASEADDR+NetWarnAddr
 #define BK_BoardCastGroupConfigAddr	BACKUPBASEADDR+BoardCastGroupConfigAddr
 #define BK_BaseInfoAddr            	BACKUPBASEADDR+BaseInfoAddr
-
+#define BK_SUBSTATIONPOSITIONADDR   BACKUPBASEADDR+SUBSTATIONPOSITIONADDR
 
 void ReadNetAddr(u8 *Addr);
 void ReadFactoryTime(u8 *FtyTime);
@@ -91,5 +92,7 @@ void ReadDeviceDefine(void);
 void UpdateDeviceInfo(void);
 void ReadBoardCastGroupConfg(void);
 void UpdateBoardCastGroupConfig(u8 *config);
+void UpdateSubStionPosition(char* position);
+void ReadSubStationPosition(char *positon);
 
 #endif

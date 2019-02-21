@@ -313,7 +313,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
+                <StartAddress>0x8010000</StartAddress>
                 <Size>0x100000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -375,7 +375,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F429xx,STARTADDR=0x08000000</Define>
+              <Define>STM32F429xx,STARTADDR=0x08010000</Define>
               <Undefine></Undefine>
               <IncludePath>.\SYSTEM;.\TOOLS\MALLOC;.\W5500;.\TOOLS\JSON;.\TOOLS\TASKMANGER;.\FATFS\exfuns;.\FATFS\src\option;.\FATFS\src;.\MB85RC256;.\TOOLS\CRCMAKER;.\SENSORS\SENSORFACTORY;.\PAGES\SYSCONFIG;.\TOOLS\FILERECV;.\TOOLS\LOGRECORDER;.\TOOLS\DATETOOL;.\PAGES\PAGEMANGER;.\PAGES\MAINPAGE;.\PAGES;.\PAGES\FONTS;.\PAGES;.\PAGES\CurValuePage;.\PAGES\SYSINFO;.\EMWIN\emWin\Lib;.\EMWIN\emWin\Config;.\EMWIN\emWin\Include;.\EMWIN\emWin\OS;.\EMWIN\STemWinHZ\EMWINFONT;.\PAGES\STATUSBAR;.\PAGES\JSONTEST;.\PAGES\LINKLIST;.\PAGES\HISTORYCURVE;.\PAGES\POWEROFFLOG;.\BEANS;.\PAGES\TASKLIST;.\WT2031;.\VS1003;.\APP\INC;.\HARDWARE\INC</IncludePath>
             </VariousControls>
