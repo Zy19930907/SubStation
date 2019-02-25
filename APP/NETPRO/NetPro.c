@@ -105,7 +105,7 @@ void UdpSocket1Recv(u8 *buf,u16 len)
 	cJSON_Delete(BootCmd);
 }
 
-void CreatUserPort(void)
+void CreatUserSocket(void)
 {
 	Sockets[TCPSOCKET0] = Net.newTcpServer(5000,TcpSocket0Recv);//创建TCPSERVER端口1
 	Sockets[TCPSOCKET1] = Net.newTcpServer(5001,TcpSocket1Recv);//创建TCPSERVER端口2
@@ -170,15 +170,17 @@ void NetPro(void)
 			break;
 		case NETCREATUSERPORT:
 			SetTaskStatus(TASKID_NETPRO,"创建用户端口");
-			CreatUserPort();
+			CreatUserSocket();
 			NetManger.Status = NETRECVCHECK;
 			break;
 		case NETRECVCHECK:
 			SetTaskStatus(TASKID_NETPRO,"数据接收");
-			if(!Net.WireIsLink())
+			if(!Net.WireIsLink())//物理连接断开
 			{
 //				SetNetLinkStatus(0);
+				Net.CloseAllSocket();//重新复位W5500前必须关闭之前创建的socket
 				NetManger.Status = NETINIT;
+				break;
 			}
 			Net.NetIntDeal();
 			NetOfflineDeal();
@@ -210,7 +212,6 @@ void UdpPro(void)
 			break;
 	}
 }
-
 //处理设备搜索指令
 void SerchCmdDeal(void)
 {
@@ -231,8 +232,6 @@ void SerchCmdDeal(void)
 	Udp.cmdType = 0x01;//UDP命令类型
 	cJSON_Delete(Ack);//释放Json对象占用的内存
 }
-
-
 //处理设备搜索指令
 void GetDevInfoCmdDeal(void)
 {
@@ -247,7 +246,7 @@ void GetDevInfoCmdDeal(void)
 	cJSON_AddStringToObject(Ack,"ipAddr",ipAddr);//分站IP地址
 	sprintf(macAddr,"%02x:%02x:%02x:%02x:%02x:%02x",Net.MacAddr[0],Net.MacAddr[1],Net.MacAddr[2],Net.MacAddr[3],Net.MacAddr[4],Net.MacAddr[5]);
 	cJSON_AddStringToObject(Ack,"macAddr",macAddr);//分站MAC地址
-	cJSON_AddNullToObject(Ack,"data");//无数据域，返回空
+	cJSON_AddNullToObject(Ack,"data");//无数据域，填充空对象
 	cJSON_AddStringToObject(Ack,"position",Sys.position);//分站安装位置
 	Udp.ackData = (u8*)cJSON_PrintUnformatted(Ack);//将JSON对象转换为byte数组
 	Udp.cmdType = 0x01;//UDP命令类型

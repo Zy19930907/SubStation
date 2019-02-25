@@ -75,5 +75,6 @@ void W5500Init(	void(*SetRst)(u8 val),
 				void(*SetCs)(u8 val),
 				void(*delay)(u32 nms),
 				u8(*spi_sentbyte)(u8 byte),
-				u8(*checkIntIo)(void));
+				u8(*checkIntIo)(void));;
+void CloseAllSocket(void);
 #endif

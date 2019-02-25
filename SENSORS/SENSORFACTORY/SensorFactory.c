@@ -5,7 +5,8 @@ char valueStr[30];
 
 const char *sensorTypes[]={"甲烷低浓","甲烷高低浓","红外甲烷","激光甲烷","管道一氧化碳","氧气","负压","温湿度","风速",
 								"二氧化碳","硫化氢","压力","粉尘","液位","烟雾","语音风门",
-								"","","","","","","","","","","","","","",
+								"DEV-0x10","DEV-0x11","DEV-0x12","DEV-0x13","DEV-0x14","DEV-0x15",
+								"DEV-0x16","DEV-0x17","DEV-0x18","DEV-0x19","DEV-0x1A","DEV-0x1B","DEV-0x1C","DEV-0x1D",
 								"网关","断电馈电器","控制分站","信号转换器","开停","电源","读卡器","发卡器","检卡器","标识卡",
 								"广播终端","控制量","风筒风量","闭锁网关","报警器"};
  
@@ -99,13 +100,12 @@ void GetSensorName(u8 index,char *name)
 	if(Sensor->Flag & 0x01)//上位机已定义
 	{
 		if(Sensor->Name == 0xFF)//未挂接传感器
-		{
 			strcat(name,"未连接");
-			return;
-		}
+		else
+			strcat(name,sensorTypes[Sensor->Name]);
 	}
 	else
-		strcpy(name,"未知");
+		strcat(name,"未定义");
 }
 
 void GetActType(u8 trigger,char *buf)

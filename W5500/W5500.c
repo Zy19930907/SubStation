@@ -17,7 +17,7 @@ void W5500_Init(void(*SetRst)(u8 val),
 void W5500Reset(void)
 {
 	W5500.SetRst(0);
-	W5500.Delay(50);
+	W5500.Delay(100);
 	W5500.SetRst(1);
 }
 

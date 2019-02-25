@@ -158,6 +158,8 @@ typedef struct
     //卡片数据时，存放4字节数据  卡片状态 ID 2个字节  RSSI
     u8  Crc;
     u8  CrcCnt;   // Crc 初始化次数
+	u8 	WarnAddr;
+	u8	WarnName;	//
     u8  Warn;     // 针对于读卡器和断电器等执行设备，该字节表示此时报警事件
     u8  RecTimes;
     u32 Tick;

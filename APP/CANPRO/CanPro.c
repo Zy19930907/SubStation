@@ -91,20 +91,14 @@ void CanSendLianDongInfo(void)
 	u8 buf[8];
 	for(i = 0;i < MaxDeviceNum;i ++)
 	{
-		if((Device[i].Warn & 0x80) && (!(Device[i].Status & 0x80)))        // 需要发送
+		if((Device[i].Warn & 0x80) && (!(Device[i].Status & 0x80)))        //需要发送
 		{
 			Can.ID = (u32) MakeFramID(0,0x39,i+1);
 			buf[0] = Device[i].Warn & 0x7F;
-			buf[1] = Excute[j].TriggerAddr;
-			buf[2] = Device[i].Name;
+			buf[1] = Device[i].WarnAddr;
+			buf[2] = Device[i].WarnName;
 			CanSendData(CanBusBelong(i+1),Can.ID,&buf[0],3);
-			for(j = 0; j < MaxTriggerNum; j ++)
-			{
-				if(Excute[j].TriggerAddr == 0)
-					break;
-				if(Excute[j].ExcuteAddr == i+1 && (Excute[j].Warn !=0))
-					SaveBreakPowerLog(i+1,Excute[j].TriggerAddr,buf[0]);
-			}
+			SaveBreakPowerLog(i+1,Device[i].WarnAddr,buf[0]);
 			LianDong.Retry ++;
 			if(LianDong.Retry > 5)
 			{
@@ -158,9 +152,17 @@ void CheckLianDongInfo(u8 addr, u8 trigger, u8 val)
                 LianDong.Retry = 0;
                 flag = 1;
                 if(val == 0)       // 取消标记
+				{
                     Excute[i].Warn &= ~trigger;
+					Device[j].WarnAddr = 0;
+					Device[j].WarnName = 0;
+				}
                 else              // 增加标记
+				{
                     Excute[i].Warn |= trigger;
+					Device[j].WarnAddr = addr;
+					Device[j].WarnName = Device[addr-1].Name;
+				}
             }
         }
     }
@@ -494,18 +496,26 @@ void AckFunc(u8 index, u8 cmd, u8 DestAddr)
     CanSendData(index, Can.ID, &buf[0], 1);
 #else
     Can.ID = (u32) MakeFramID(0, cmd, DestAddr);
-//  if(Device[DestAddr - 1].Flag & 0x04)            // 参与断线控制
-	if(Device[DestAddr - 1].Warn)
-        Can.ID |= 0x8000;
-    buf[0] = Device[DestAddr - 1].Warn & 0x7F;
+//  if(Device[DestAddr - 1].Flag & 0x04)            // 参与断线控制  
     if(Sys.Delay)                                  // 倒计时未结束，不发控制指令
         CanSendData(index, Can.ID, &buf[0], 0);
     else
 	{
-		if(Device[DestAddr - 1].Name == 0x28)
+		if(Device[DestAddr - 1].Warn)
+			Can.ID |= 0x8000;
+		buf[0] = Device[DestAddr - 1].Warn & 0x7F;
+		if(Device[DestAddr - 1].Name == 0x28)//对广播的应答
 		{
-			buf[1] = Device[DestAddr-1].BoardCastGroup;
-			CanSendData(index, Can.ID, &buf[0], 2);
+			if(Device[DestAddr - 1].Warn & 0x7F)//存在报警标志，发送报警类型-触发地址-触发传感器类型
+			{
+				buf[1] = Device[DestAddr-1].WarnAddr;
+				buf[2] = Device[DestAddr-1].WarnName;
+				CanSendData(index, Can.ID, &buf[0], 3);
+			}else//不存在报警标志，发送广播终端所在广播组
+			{
+				buf[0] = Device[DestAddr-1].BoardCastGroup;
+				CanSendData(index, Can.ID, &buf[0], 1);
+			}
 		}else
 			CanSendData(index, Can.ID, &buf[0], 1);
 	}
@@ -775,6 +785,8 @@ void HandleCanData(u32 ID, u8 CanIndex)
         Device[addr - 1].Status += (status + (Can.Buf[0] >> 7)); //状态位+按键状态位
         if(Device[addr - 1].Warn & 0x7F)
 			Device[addr - 1].Status |= 0x02;
+		else
+			Device[addr - 1].Status &= ~0x02;
         Device[addr - 1].Buf[0] = Can.Buf[0] & 0x7F;
         Device[addr - 1].Buf[1] = Can.Buf[1];
         AckFunc(CanIndex, ACK, addr);
