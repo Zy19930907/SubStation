@@ -1,0 +1,32 @@
+#ifndef __PUBLIC_H
+#define __PUBLIC_H
+
+#include <stdio.h>
+#include <string.h>
+
+#include "sys.h"
+#include "Socket.h"
+#include "cJSON.h"
+#include "malloc.h"
+#include "Mcu.h"
+#include "sdram.h"
+#include "sdio_sdcard.h"
+#include "TaskManger.h"
+#include "FmInit.h"
+#include "W5500.h"
+#include "W5500Spi.h"
+#include "NetPro.h"
+#include "Config.h"
+#include "NetDataPro.h"
+#include "DataBean.h"
+#include "Flash.h"
+#include "IapPro.h"
+
+
+#define SWAP16(s) ((((s) & 0xff) << 8) | (((s) >> 8) & 0xff)) 
+#define SWAP32(s) (((s) >> 24) |(((s) & 0x00ff0000) >> 8)  |(((s) & 0x0000ff00) << 8)  | ((s) << 24)) 
+
+void BufCopy(u8 *d, u8 *s,u16 len);
+u8 BufCmp(u8 *s1,u8 *s2,u16 len);
+
+#endif

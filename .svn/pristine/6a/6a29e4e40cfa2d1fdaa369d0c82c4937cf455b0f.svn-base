@@ -1,0 +1,92 @@
+#include "IapPro.h"
+
+u32 TASKID_IAPTASK = 0xFFFFFFFF;
+_Iap Iap;
+
+void SendBean(char* type)
+{
+	Iap.sendBean = createDataBean(type);
+	Iap.sendLen = strlen((char*)Iap.sendBean);
+	NetSendData(Iap.IapSocket,Iap.sendBean,Iap.sendLen);
+	myfree(SRAMIN,Iap.sendBean);
+	DeleteBean();
+}
+
+void IapPro(void)
+{
+	switch(Iap.Status)
+	{
+		case DEVREG:
+			SendBean(VAL_DEVREG);
+			Iap.Tout = 30000;//超时时间30秒，此时上位机需要选择固件
+			Iap.Tick = SYS_TICK;
+			Iap.Status = REGSUCCESS;
+			break;
+		case REGSUCCESS:
+			if(MsTickDiff(Iap.Tick) > Iap.Tout)//Iap超时
+			{
+				if(AppExist())//APP段存在
+					Jump2App();//跳转到APP运行
+				else//APP段不存在
+					Sys_Soft_Reset();//重新运行引导程序
+			}
+			break;
+	}
+}
+
+void StartIap(u8 sn)
+{
+	TASKID_IAPTASK = CreateTask("Iap",0,0,0,0,0,IapPro);
+	Iap.IapSocket = sn;
+}
+
+void IapDataRecv(u8 *buf,u16 len)
+{
+	cJSON *RecvBean;
+	cJSON *pItem;
+	cJSON *pArray; 
+	u16 dataLen;
+	u16 i;
+	u32 DataAddr;
+	Iap.Tick = SYS_TICK;
+	RecvBean = cJSON_Parse((char*)buf);//数组转换为JSON对象
+	pItem = cJSON_GetObjectItem(RecvBean,KEY_DATALEN);//获取数据长度键值对
+	dataLen = pItem->valueint;//数据长度
+	Iap.Data = mymalloc(SRAMIN,dataLen);//申请内存用于存放数据
+	pItem = cJSON_GetObjectItem(RecvBean,KEY_DATAADDRESS);//获取数据地址键值对
+	DataAddr = pItem->valuedouble;//数据写入地址
+	pItem = cJSON_GetObjectItem(RecvBean,KEY_DATA);//获取数据体键值对
+	pArray = pItem->child;//数据体指针
+	
+	for(i=0;i<dataLen;i++)//遍历获取数据
+	{
+		*(Iap.Data + i) = (pArray->valueint & 0xFF);
+		pArray = pArray->next;
+	}
+	
+	pItem = cJSON_GetObjectItem(RecvBean,KEY_DATATYPE);
+	if(BufCmp((u8*)pItem->valuestring,(u8*)DATATYPE_CHECKMD5,strlen(DATATYPE_CHECKMD5)))//指令类型为校验MD5
+	{
+		if(AppMd5Check((u16*)Iap.Data))
+		{
+			SendBean(DATATYPE_VERSAME);
+			Jump2App();
+		}
+		else
+		{
+			SendBean(DATATYPE_VERDIFF);
+		}
+	}else if(BufCmp((u8*)pItem->valuestring,(u8*)DATATYPE_FLASHDATA,strlen(DATATYPE_FLASHDATA)))//写入FLASH
+	{
+		WriteAppToFlash(DataAddr + APPSTARTADDR,(u16*)Iap.Data,dataLen);
+		SendBean(DATATYPE_WRITEOK);
+	}else if(BufCmp((u8*)pItem->valuestring,(u8*)DATATYPE_UPDATEOK,strlen(DATATYPE_UPDATEOK)))//更新数据发送完成
+	{
+		SendBean(DATATYPE_UPDATEOK);
+		WriteAppToFlash(APPMD5ADDR,(u16*)Iap.Data,dataLen);
+		Jump2App();
+	}
+	//释放json对象
+	cJSON_Delete(RecvBean);
+	myfree(SRAMIN,Iap.Data);
+}

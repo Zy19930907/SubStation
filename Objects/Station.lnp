@@ -28,7 +28,6 @@
 ".\objects\cjson.o"
 ".\objects\taskmanger.o"
 ".\objects\crcmaker.o"
-".\objects\filerecv.o"
 ".\objects\logrecorder.o"
 ".\objects\datetool.o"
 ".\objects\socket.o"

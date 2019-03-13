@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp
+".\objects\sys.o"
+".\objects\startup_stm32f429xx.o"
+".\objects\main.o"
+".\objects\public.o"
+".\objects\netpro.o"
+".\objects\config.o"
+".\objects\iappro.o"
+".\objects\w5500spi.o"
+".\objects\rng.o"
+".\objects\mcu.o"
+".\objects\sdram.o"
+".\objects\flash.o"
+".\objects\socket.o"
+".\objects\w5500.o"
+".\objects\taskmanger.o"
+".\objects\malloc.o"
+".\objects\cjson.o"
+".\objects\crcmaker.o"
+".\objects\fminit.o"
+".\objects\databean.o"
+--library_type=microlib --strict --scatter ".\Objects\Bootloader.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Bootloader.map" -o .\Objects\Bootloader.axf

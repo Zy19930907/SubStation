@@ -582,11 +582,6 @@
               <FilePath>.\TOOLS\CRCMAKER\CrcMaker.c</FilePath>
             </File>
             <File>
-              <FileName>FileRecv.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\TOOLS\FILERECV\FileRecv.c</FilePath>
-            </File>
-            <File>
               <FileName>LogRecorder.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\TOOLS\LOGRECORDER\LogRecorder.c</FilePath>

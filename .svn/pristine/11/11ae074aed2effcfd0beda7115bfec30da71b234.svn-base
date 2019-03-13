@@ -1,0 +1,37 @@
+#ifndef __NETPRO_H
+#define __NETPRO_H
+
+#include "Public.h"
+
+#define MAXSOCKETCNT			2
+#define NETOFFLINETIME			15000
+#define TCPSOCKET0				0
+#define TCPSOCKET1				1
+#define TCPSOCKET2				2
+#define UDPSOCKET0				3
+#define DEBUGSOCKET				4
+
+typedef enum
+{
+	NETINIT,
+	NETWAITHARDLINK,
+	NETCREATUSERPORT,
+	NETRECVCHECK,
+}_NetStatus;
+
+typedef struct
+{
+	_NetStatus Status;
+	u8 Flag;
+	u32 SocketTick[MAXSOCKETCNT];
+	u32 Tick;
+	void(*SendData)(u8 Scoketn,u8 *buf,u16 len);
+}_NetManger;
+
+extern _NetManger NetManger;
+extern u32 TASKID_NETPRO;
+
+void NetPro(void);
+void NetSendData(u8 socketn,u8 *buf,u16 len);
+
+#endif

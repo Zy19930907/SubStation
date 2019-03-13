@@ -1,0 +1,13 @@
+.\objects\sdram.o: HARDWARE\SDRAM\sdram.c
+.\objects\sdram.o: .\HARDWARE\INC\sdram.h
+.\objects\sdram.o: .\SYSTEM\sys.h
+.\objects\sdram.o: .\SYSTEM\stm32f4xx.h
+.\objects\sdram.o: .\SYSTEM\stm32f429xx.h
+.\objects\sdram.o: .\SYSTEM\core_cm4.h
+.\objects\sdram.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sdram.o: .\SYSTEM\core_cmInstr.h
+.\objects\sdram.o: .\SYSTEM\cmsis_armcc.h
+.\objects\sdram.o: .\SYSTEM\core_cmFunc.h
+.\objects\sdram.o: .\SYSTEM\core_cmSimd.h
+.\objects\sdram.o: .\SYSTEM\system_stm32f4xx.h
+.\objects\sdram.o: .\HARDWARE\INC\Mcu.h

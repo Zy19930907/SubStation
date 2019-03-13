@@ -1,0 +1,31 @@
+#ifndef __DATABEAN_H
+#define __DATABEAN_H
+
+#include "Public.h"
+//JSON值定义
+#define VAL_DEVTYPE						"综合分站"		//设备类型综合分站
+#define VAL_BOOTSOFTVERB				"V2.0"
+#define VAL_DEVREG						"DEVREG"
+
+//JSON键定义
+#define KEY_DEVTYPE						"devType"			//设备类型
+#define KEY_BOOTSOFTVERB				"bootVersion"		//引导程序版本
+#define KEY_DATATYPE					"dataType"			//数据类型
+#define KEY_HEXSIZE						"hexSize"			//程序文件长度
+#define KEY_UPDATESIZE					"upDateSize"		//当前已更新长度
+#define KEY_DATALEN						"dataLen"			//当前数据包中数据长度
+#define KEY_DATAADDRESS					"dataAdress"		//写入flash起始地址
+#define KEY_DATA						"data"				//数据
+
+//数据类型定义
+#define DATATYPE_CHECKMD5				"CHECKMD5"			//校验MD5
+#define DATATYPE_VERSAME				"VERSIONSAME"		//程序版本相同
+#define DATATYPE_VERDIFF				"VERSIONDIFF"		//程序版本不同
+#define DATATYPE_WRITEOK				"WRITEOK"			//写入成功应答
+#define DATATYPE_UPDATEOK				"UPDATEOK"			//程序更新完成
+
+#define DATATYPE_FLASHDATA				"FLASHDATA"			//需要写入FLASH的数据
+#define DATATYPE_LASTFLASHDATA			"LASTFLASHDATA"		//需要写入FLASH的数据
+u8* createDataBean(char* AckType);
+void DeleteBean(void);
+#endif

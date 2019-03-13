@@ -1,0 +1,35 @@
+#ifndef __FLASH_H
+#define __FLASH_H
+
+#include "Public.h"
+
+#define FLASH_BASEADDR  	0x08000000	
+#define FLASH_MAXADDR		0x080EFFFF
+
+#define FLASH_BUSY			(1<<16)	
+#define EARSEFLASH_PAGE		0x00000002	//页擦除模式
+#define FLASH_PROGRAM		0x00000001	//Flash编程模式
+#define KEYREG				*(vu32*)(FLASH + 0x04)
+
+//FLASH解锁键值
+#define FLASH_KEY1          0X45670123
+#define FLASH_KEY2          0XCDEF89AB
+
+#define BOOTLOADERADDR		(u32)0x08000000	//BootLoader起始地址
+#define APPMD5ADDR			(u32)0x080EE000	//该地址记录当前程序MD5校验值
+#define APPVERSIONENDADDR	(u32)0x080EE0FF
+#define APPSTARTADDR  		(u32)0x08010000	//App起始地址
+#define APPENDADDR			(u32)0x080EF000	//APP结束地址
+#define APPMD5LEN			8				//MD5校验码长度
+
+void WriteFlash(u32 FlashAddr,u16 Data);
+void WriteAppToFlash(u32 StartAddr,u16 *buf,u16 len);
+void EraseApp(void);
+void UpDataAddr(u32 FlashAddr);
+void WriteMd5ToFlash(u16 *Md5);
+u8 AppExist(void);
+u8 AppMd5Check(u16 *ServerAppMd5);
+void Jump2App(void);
+void Jump2Boot(void);
+
+#endif

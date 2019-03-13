@@ -1,0 +1,21 @@
+#include "Public.h"
+
+void BufCopy(u8 *d, u8 *s,u16 len)
+{
+	if(len <= 0)
+		return;
+	do{
+		*d++ = *s++;
+	}while(--len);
+}
+
+u8 BufCmp(u8 *s1,u8 *s2,u16 len)
+{
+	u16 i;
+	for(i=0;i<len;i++)
+	{
+		if(*(s1+i) != *(s2+i))
+			return 0;
+	}
+	return 1;
+}

@@ -1,0 +1,38 @@
+#include "Public.h"
+
+////RUNLED---PE4
+#define RUNLEDCHANGE	GPIOE->ODR ^= 1<<4
+u32 TASKID_RUNLED 		= 0xFFFFFFFF;
+u32 TASKID_SENDTASKLIST = 0xFFFFFFFF;
+
+void UserIoInit(void)
+{
+	RCC->AHB1ENR |= (1<<4); //PE时钟使能
+	GPIOE->MODER |= (1 << 8);//推挽输出
+	GPIOE->OSPEEDR |= (3 << 8);
+}
+
+void RunLedTask(void)
+{
+	RUNLEDCHANGE;
+}
+
+int main(void)
+{
+	McuInit();														//初始化时钟、系统时基定时器
+	UserIoInit();													//初始化LED引脚
+	SDRAM_Init();													//初始化SDRAM
+	my_mem_init(SRAMIN);											//初始化内部内存池
+	my_mem_init(SRAMEX);											//初始化外部内存池 
+	my_mem_init(SRAMCCM);											//初始化CCM内存池 
+	
+	FmMemoryInit();													//初始化EEPROM读写接口
+	delay_ms(1000);													//延时等待EEPROM正常工作
+	ReadDefaultConfig();											//读取默认配置
+	
+	CreateTask("运行指示灯",0,0,0,0,30,RunLedTask);				//运行指示灯任务
+	TASKID_NETPRO = CreateTask("网络数据收发",0,0,0,0,0,NetPro);	//网络数据收发及处理任务
+	
+	ExecTask();														//循环执行任务列表中的任务
+}
+

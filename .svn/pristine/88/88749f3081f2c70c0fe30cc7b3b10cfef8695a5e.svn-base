@@ -1,0 +1,28 @@
+#ifndef __IAPPRO_H
+#define __IAPPRO_H
+
+#include "Public.h"
+
+typedef enum
+{
+	DEVREG,
+	REGSUCCESS,
+}_IapStatus;
+
+typedef struct 
+{
+	_IapStatus Status;
+	u32 Tout;//³¬Ê±Ê±¼ä
+	u32 Tick;
+	u8 IapSocket;
+	u8* sendBean;
+	u16 sendLen;
+	u8* Data;
+}_Iap;
+
+extern _Iap Iap;
+
+void IapDataRecv(u8 *buf,u16 len);
+void StartIap(u8 sn);
+	
+#endif

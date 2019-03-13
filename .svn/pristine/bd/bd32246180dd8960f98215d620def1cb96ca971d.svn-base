@@ -1,0 +1,45 @@
+#ifndef __KEY_H
+#define __KEY_H
+
+#include "Public.h"
+
+//---------------------------------------------------------------界面控制按钮------------------------------------------------------------------
+#define UPKEYPORT					GPIOC
+#define UPKEYPIN					13
+
+#define DOWNKEYPORT					GPIOH
+#define DOWNKEYPIN					3
+
+#define CONFIRMKEYPORT				GPIOH
+#define CONFIRMKEYPIN				2
+
+#define EXITKEYPORT					GPIOA
+#define EXITKEYPIN					0
+
+#define MOVEKEYPORT					GPIOA
+#define MOVEKEYPIN					4
+
+#define KEYCLKEN					RCC->AHB1ENR |= 0x85 //使能PA、PC、PH时钟
+
+#define UPKEYVALUE					(!((UPKEYPORT->IDR >> UPKEYPIN) & 0x01))
+#define DOWNKEYVALUE				(!((DOWNKEYPORT->IDR >> DOWNKEYPIN) & 0x01))
+#define CONFIRMKEYVALUE				(!((CONFIRMKEYPORT->IDR >> CONFIRMKEYPIN) & 0x01))
+#define EXITKEYVALUE				((EXITKEYPORT->IDR >> EXITKEYPIN) & 0x01)
+#define	MOVEKEYVALUE				(!((MOVEKEYPORT->IDR >> MOVEKEYPIN) & 0x01))
+#define KEYSVALUE					(MOVEKEYVALUE<<4) | ((EXITKEYVALUE << 3) | ((UPKEYVALUE << 2) | (CONFIRMKEYVALUE << 1) |  DOWNKEYVALUE))
+void KeyInit(void);
+//----------------------------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------对讲按钮---------------------------------------------------------------------
+#define TOLKKEYPORT					GPIOC
+#define TOLKKEYPIN					15
+
+#define BOARDCASTPORT				GPIOB
+#define BOARDCASTPIN				3
+
+#define TOLKKEYVALUE				(((TOLKKEYPORT->IDR >> TOLKKEYPIN) & 0x01))
+#define BOARDCASTKEYVALUE			(((BOARDCASTPORT->IDR >> BOARDCASTPIN) & 0x01))
+#define TOLKVALUE					BOARDCASTKEYVALUE | (TOLKKEYVALUE << 1)
+//----------------------------------------------------------------------------------------------------------------------------------------------
+
+#endif

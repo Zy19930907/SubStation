@@ -1,0 +1,12 @@
+.\objects\w5500spi.o: HARDWARE\W5500SPI\W5500Spi.c
+.\objects\w5500spi.o: .\HARDWARE\INC\W5500Spi.h
+.\objects\w5500spi.o: .\SYSTEM\sys.h
+.\objects\w5500spi.o: .\SYSTEM\stm32f4xx.h
+.\objects\w5500spi.o: .\SYSTEM\stm32f429xx.h
+.\objects\w5500spi.o: .\SYSTEM\core_cm4.h
+.\objects\w5500spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\w5500spi.o: .\SYSTEM\core_cmInstr.h
+.\objects\w5500spi.o: .\SYSTEM\cmsis_armcc.h
+.\objects\w5500spi.o: .\SYSTEM\core_cmFunc.h
+.\objects\w5500spi.o: .\SYSTEM\core_cmSimd.h
+.\objects\w5500spi.o: .\SYSTEM\system_stm32f4xx.h

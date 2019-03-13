@@ -1,0 +1,12 @@
+.\objects\mcu.o: HARDWARE\Mcu\Mcu.c
+.\objects\mcu.o: .\HARDWARE\INC\Mcu.h
+.\objects\mcu.o: .\SYSTEM\sys.h
+.\objects\mcu.o: .\SYSTEM\stm32f4xx.h
+.\objects\mcu.o: .\SYSTEM\stm32f429xx.h
+.\objects\mcu.o: .\SYSTEM\core_cm4.h
+.\objects\mcu.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\mcu.o: .\SYSTEM\core_cmInstr.h
+.\objects\mcu.o: .\SYSTEM\cmsis_armcc.h
+.\objects\mcu.o: .\SYSTEM\core_cmFunc.h
+.\objects\mcu.o: .\SYSTEM\core_cmSimd.h
+.\objects\mcu.o: .\SYSTEM\system_stm32f4xx.h

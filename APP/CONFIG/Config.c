@@ -243,15 +243,40 @@ void ReadNetWarn(u8 *warn)
     else if(ConfigCheck(BK_NetWarnAddr, 3))
     {
         if(!ConfigBuf[0])
-            *warn &= ~0x04;
+			*warn &= ~0x04;
     }
 }
 
+//读取广播分组配置
 void ReadBoardCastGroupConfg(void)
 {
 	u64 configL=0,configH=0;
 	u8 i,j;
-	if(ConfigCheck(BoardCastGroupConfigAddr, 130))
+	if(ConfigCheck(BoardCastGroupConfigAddr, 130))//先读主存储区域内的配置
+    {
+		for(i=0;i<8;i++)//8个广播组
+		{
+			configL = 0;
+			configH = 0;
+			for(j=0;j<8;j++)
+			{
+				configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
+				configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
+			}
+			for(j=0;j<64;j++)
+			{
+				if((configL >> j) & 0x01)
+					Device[j].BoardCastGroup |= (1<<i);
+				else
+					Device[j].BoardCastGroup &= ~(1<<i);
+				if((configH >> j) & 0x01)
+					Device[64+j].BoardCastGroup |= (1<<i);
+				else
+					Device[64+j].BoardCastGroup &= ~(1<<i);
+			}
+		}
+    }
+    else if(ConfigCheck(BK_BoardCastGroupConfigAddr, 130))//备份存储区域
     {
 		for(i=0;i<8;i++)
 		{
@@ -262,46 +287,18 @@ void ReadBoardCastGroupConfg(void)
 				configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
 				configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
 			}
-			
 			for(j=0;j<64;j++)
 			{
 				if((configL >> j) & 0x01)
 					Device[j].BoardCastGroup |= (1<<i);
 				else
 					Device[j].BoardCastGroup &= ~(1<<i);
-				
 				if((configH >> j) & 0x01)
 					Device[64+j].BoardCastGroup |= (1<<i);
 				else
 					Device[64+j].BoardCastGroup &= ~(1<<i);
 			}
 		}
-    }
-    else if(ConfigCheck(BK_BoardCastGroupConfigAddr, 130))
-    {
-			for(i=0;i<8;i++)
-			{
-				configL = 0;
-				configH = 0;
-				for(j=0;j<8;j++)
-				{
-					configL |= ((ConfigBuf[(2*i)*8+j]) << j*8);
-					configH |= ((ConfigBuf[(2*i+1)*8+j]) << j*8);
-				}
-				
-				for(j=0;j<64;j++)
-				{
-					if((configL >> j) & 0x01)
-						Device[j].BoardCastGroup |= (1<<i);
-					else
-						Device[j].BoardCastGroup &= ~(1<<i);
-					
-					if((configH >> j) & 0x01)
-						Device[64+j].BoardCastGroup |= (1<<i);
-					else
-						Device[64+j].BoardCastGroup &= ~(1<<i);
-				}
-			}
     }	
 }
 

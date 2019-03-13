@@ -1,0 +1,106 @@
+#include "NetPro.h"
+#include "NetDataPro.h"
+#include "DebugPro.h"
+
+W5500SOCKET* Sockets[MAXSOCKETCNT];
+
+u32 TASKID_NETPRO = 0xFFFFFFFF;
+_NetManger NetManger;
+
+void TcpSocket0Recv(u8 *buf,u16 len)
+{	
+	NetManger.SocketTick[TCPSOCKET0] = SYS_TICK;
+}
+
+void TcpSocket1Recv(u8 *buf,u16 len)
+{
+	NetManger.SocketTick[TCPSOCKET1] = SYS_TICK;
+}
+
+void CreatUserPort(void)
+{
+	if(!BufCmp(Net.DefaultIapServer,Net.IapServer,4))//用户配置固件更新服务器地址与默认固件更新服务器地址不同
+	{
+		Sockets[TCPSOCKET0] = Net.newTcpClient(Net.DefaultIapServer,Net.IapPort,Net.port,IapDataRecv);
+		Sockets[TCPSOCKET1] = Net.newTcpClient(Net.IapServer,Net.IapPort,Net.port,IapDataRecv);
+	}else
+		Sockets[TCPSOCKET0] = Net.newTcpClient(Net.DefaultIapServer,Net.IapPort,Net.port,IapDataRecv);
+	NetManger.SocketTick[TCPSOCKET0] = SYS_TICK;
+	NetManger.SocketTick[TCPSOCKET1] = SYS_TICK;
+}
+
+void NetOnlineCheck(void)
+{
+	u8 i;
+	for(i=0;i<MAXSOCKETCNT;i++)
+	{
+		if(MsTickDiff(NetManger.SocketTick[i]) >= NETOFFLINETIME)
+		{
+			Net.ReCreatSocket(Sockets[i]);
+			NetManger.SocketTick[i] = SYS_TICK;
+			return;
+		}
+	}
+}
+
+void NetSendData(u8 socketn,u8 *buf,u16 len)
+{
+	Net.SendTcpData(Sockets[socketn],buf,len);
+}
+
+void NetPro(void)
+{
+	switch(NetManger.Status)
+	{
+		case NETINIT:
+			SetTaskStatus(TASKID_NETPRO,"W5500初始化");
+			NetManger.SendData = NetSendData;
+			W5500Spi_Init();//初始化W5500数据接口
+			//注册W5500操作函数
+			W5500Init(W5500SetRstValue,W5500SetCsValue,delay_ms,W5500Spi_SendByte,W5500GetIntIoState);
+			NetManger.Tick   = SYS_TICK;
+			NetManger.Status = NETWAITHARDLINK;
+			break;
+		case NETWAITHARDLINK:
+			SetTaskStatus(TASKID_NETPRO,"W5500硬件连接");
+			if(Net.WireIsLink())//等待以太网连接完成
+			{
+				Net.SubMask[0] = 255;
+				Net.SubMask[1] = 255;
+				Net.SubMask[2] = 255;
+				Net.SubMask[3] = 0;
+				Net.SetAddrInfo(Net.localIp,Net.GatewayIP,Net.SubMask,Net.MacAddr);
+				NetManger.Status = NETCREATUSERPORT;
+			}
+			if(MsTickDiff(NetManger.Tick) > 5000)//物理连接，实测需要2s左右时间
+				NetManger.Status = NETINIT;
+			break;
+		case NETCREATUSERPORT:
+			SetTaskStatus(TASKID_NETPRO,"创建用户端口");
+			CreatUserPort();
+			NetManger.Tick = SYS_TICK;
+			NetManger.Status = NETRECVCHECK;
+			break;
+		case NETRECVCHECK:
+			if((Net.Sockets[TCPSOCKET0].Mode == MODE_TCPCLIENT)&&(Iap.Status==DEVREG))
+				StartIap(TCPSOCKET0);
+			else if((Net.Sockets[TCPSOCKET1].Mode == MODE_TCPCLIENT)&&(Iap.Status==DEVREG))
+				StartIap(TCPSOCKET1);
+			
+			if((MsTickDiff(NetManger.Tick) >= 5000) &&(Iap.Status==DEVREG))
+			{
+				if(AppExist())//APP段存在
+					Jump2App();//跳转到APP运行
+				else//APP段不存在
+					Sys_Soft_Reset();//重新运行引导程序
+			}
+			
+			SetTaskStatus(TASKID_NETPRO,"数据接收");
+			if(!Net.WireIsLink())//物理连接断开
+				NetManger.Status = NETINIT;
+			Net.NetIntDeal();
+			//NetOnlineCheck();
+			break;
+	}
+}
+

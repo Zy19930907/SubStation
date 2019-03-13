@@ -1,0 +1,177 @@
+#include "Flash.h"
+
+typedef  void (*pFunction)(void); 
+pFunction Jump_To_Application;
+u32 JumpAddress;
+u32 WriteAddress;
+
+//解锁STM32的FLASH
+void UnlockFlash(void)
+{
+	FLASH->KEYR=FLASH_KEY1;	//写入解锁序列.
+	FLASH->KEYR=FLASH_KEY2; 
+}
+//flash上锁
+void LockFlash(void)
+{
+	FLASH->CR|=(u32)1<<31;//上锁
+}
+
+//设置主堆栈指针
+static void __setMSP(u32 topOfMainStack)
+{
+	register u32 __regMainStackPointer    __asm("msp");
+	__regMainStackPointer = topOfMainStack;
+}
+
+//跳转到APP区域
+void Jump2App(void)
+{	
+	JumpAddress = *(vu32*)(APPSTARTADDR+4);
+	Jump_To_Application = (pFunction) JumpAddress;
+	__setMSP(*(vu32*) APPSTARTADDR);
+	Jump_To_Application();
+}
+
+//跳转到BootLoader
+void Jump2Boot(void)
+{
+	JumpAddress = *(vu32*)(BOOTLOADERADDR+4);
+	Jump_To_Application = (pFunction) JumpAddress;
+	__setMSP(*(vu32*) BOOTLOADERADDR);
+	Jump_To_Application();
+}
+u8 STMFLASH_GetStatus(void)
+{	
+	 u32 res=0;		
+	res=FLASH->SR;  
+	if(res&(1<<16))return 1;   		//忙
+	else if(res&(1<<4))return 2;	//操作异常 
+	else if(res&(1<<5))return 2;	//操作异常 
+	else if(res&(1<<6))return 2;	//操作异常 
+	else if(res&(1<<7))return 2;	//操作异常 
+	return 0;						//没有任何状态/操作完成.
+} 
+
+//查询flash是否繁忙
+u8 FlashBusy(void)
+{
+	if((FLASH->SR >> 16) & 0x01)
+		return 1;
+	else
+		return 0;
+}
+
+//MD5校验对比，以确认服务器固件与当前固件是否相同
+u8 AppMd5Check(u16 *ServerAppMd5)
+{
+	u8 i;
+	for(i=0;i<APPMD5LEN;i++)
+	{
+		if(*(ServerAppMd5+i)!=*(vu16*)(APPMD5ADDR+(i<<1)))
+		{
+			EraseApp();
+			return 0;
+		}
+	}
+	return 1;
+}
+
+//若MD5存储区域为全FF则认为程序区无程序
+u8 AppExist(void)
+{
+	u16 i,temp;
+	for(i=0;i<APPMD5LEN<<1;i++)
+	{
+		temp = (*(vu16*)(APPMD5ADDR+(i<<1)));
+		if(temp != 0xFFFF)
+			return 1;
+	}
+	return 0;
+}
+
+//擦除APP区域
+void EraseApp(void)
+{
+	u8 i;
+	UnlockFlash();
+	FLASH->SR |= 1 << 7;
+	FLASH->CR &= ~(3<<8);	//清除PSIZE原来的设置
+	FLASH->CR |= 2<<8;	//设置为32bit宽,确保VCC=2.7~3.6V之间!!
+	while(FlashBusy());//等待falsh空闲
+	for(i = 4;i<12;i++)
+	{
+		FLASH->CR |= EARSEFLASH_PAGE;//选择页擦除
+		while(FlashBusy());//等待falsh空闲
+		FLASH->CR &=~(0X1F<<3);//清除原来的设置
+		FLASH->CR |= i << 3;//扇区编号
+		FLASH->CR |= (1<<16);//开始擦除
+		while(FlashBusy());//等待falsh空闲
+		FLASH->CR &= ~EARSEFLASH_PAGE;//退出页擦除模式
+	}
+	LockFlash();
+}
+
+void WriteFlash(u32 FlashAddr,u16 Data)
+{
+	UnlockFlash();
+	if(FlashAddr >= FLASH_MAXADDR)//写入地址不能超过flash最大地址
+		return;	
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR&=~(3<<8);	//清除PSIZE原来的设置
+	FLASH->CR |= 0x01 << 8;//16位编程模式
+	FLASH->CR |= FLASH_PROGRAM;//选择编程模式
+	*(vu16*)FlashAddr = Data;//写入数据
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR &= ~FLASH_PROGRAM;//退出编程模式
+	LockFlash();
+}
+
+void WriteAppToFlash(u32 StartAddr,u16 *buf,u16 len)
+{
+	UnlockFlash();
+	len >>= 1;
+	FLASH->CR&=~(3<<8);	//清除PSIZE原来的设置
+	FLASH->CR |= 0x01 << 8;//16位编程模式
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR |= FLASH_PROGRAM;//选择编程模式
+	do
+	{
+		while(FlashBusy());//等待falsh空闲
+		*(vu16*)StartAddr = *(buf++);//写入数据
+		StartAddr += 2;
+		if(StartAddr>=FLASH_MAXADDR)//写入地址不能超过flash最大地址
+			return;
+	}while(--len);
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR &= ~FLASH_PROGRAM;//退出编程模式
+	LockFlash();
+}
+
+void WriteAppVersionToFlash(u32 StartAddr,u16 *buf,u16 len)
+{
+	UnlockFlash();
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR |= FLASH_PROGRAM;//选择编程模式
+	do
+	{
+		while(FlashBusy());//等待falsh空闲
+		*(vu16*)StartAddr = *(buf++);//写入数据
+		StartAddr+=2;
+		if(StartAddr>=FLASH_MAXADDR)//写入地址不能超过flash最大地址
+			return;
+	}while(--len);
+	while(FlashBusy());//等待falsh空闲
+	FLASH->CR &= ~FLASH_PROGRAM;//退出编程模式
+	LockFlash();
+}
+
+void UpDataAddr(u32 FlashAddr)
+{
+	WriteAddress = FlashAddr;
+}
+
+void WriteMd5ToFlash(u16 *Md5)
+{
+	WriteAppVersionToFlash(APPMD5ADDR,Md5,APPMD5LEN);
+}

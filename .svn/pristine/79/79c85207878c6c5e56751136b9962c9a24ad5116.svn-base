@@ -1,0 +1,126 @@
+#include "Config.h"
+#include "CrcMaker.h"
+#include "FmInit.h"
+#include "malloc.h"
+#include "rng.h"
+
+u8 ConfigBuf[50];
+
+void WriteConfig(u16 addr, u8 *buf, u16 len)
+{
+	SetCrc16(buf, len, 0);
+	FramWriteBurstByte(addr, buf, len + 2); //配置信息存入主存储区
+	FramWriteBurstByte(addr + BACKUPBASEADDR, buf, len + 2); //配置信息存入备份存储区
+}
+
+void WriteCurConfig(u16 addr, u16 len)
+{
+    FramWriteBurstByte(addr, ConfigBuf, len); //配置信息存入主存储区
+    FramWriteBurstByte(addr + BACKUPBASEADDR, ConfigBuf, len); //配置信息存入备份存储区
+}
+
+u8 ConfigCheck(u16 addr, u8 len)
+{
+    FramReadBurstByte(addr, ConfigBuf, len);
+    if(CheckCrc16(ConfigBuf, len - 2, 0))
+        return 1;
+    else
+        return 0;
+}
+
+void ReadNetIpAddr(u8 *ip)
+{
+    u8 i;
+    *ip = 192;
+    *(ip + 1) = 168;
+    *(ip + 2) = 1;
+    *(ip + 3) = 251;
+    *(ip + 4) = 0x88;
+    *(ip + 5) = 0x13;
+    if(ConfigCheck(NetIpAddr, 8))
+    {
+        for(i = 0; i < 4; i++)
+            *(ip + i) = *(ConfigBuf + i);
+    }
+    else if(ConfigCheck(BK_NetIpAddr, 8))
+    {
+        for(i = 0; i < 4; i++)
+            *(ip + i) = *(ConfigBuf + i);
+    }
+    WriteCurConfig(NetIpAddr, 8);
+}
+
+void ReadGateWayIp(u8 *DefaultGateWayIp)
+{
+    u8 i;
+    *DefaultGateWayIp = 192;
+    *(DefaultGateWayIp + 1) = 168;
+    *(DefaultGateWayIp + 2) = 1;
+    *(DefaultGateWayIp + 3) = 1;
+    if(ConfigCheck(GateWayIpAddr, 6))
+    {
+        for(i = 0; i < 4; i++)
+            *(DefaultGateWayIp + i) = *(ConfigBuf + i);
+    }
+    else if(ConfigCheck(BK_GateWayIpAddr, 6))
+    {
+        for(i = 0; i < 4; i++)
+            *(DefaultGateWayIp + i) = *(ConfigBuf + i);
+    }
+    WriteCurConfig(GateWayIpAddr, 6);
+}
+
+void ReadMacAddr(u8 *DefaultMac)
+{
+    u8 i;
+    u32 *p = (u32*)(DefaultMac + 1);
+    *DefaultMac = 0x00;
+    RNG_Init();
+    *p = RNG_Get_RandomNum();//默认Mac地址，采用STM32F4硬件随机数生成
+    if(ConfigCheck(MacBufAddr, 8))
+    {
+        for(i = 0; i < 6; i++)
+            *(DefaultMac + i) = *(ConfigBuf + i);
+    }
+    else if(ConfigCheck(BK_MacBufAddr, 8))
+    {
+        for(i = 0; i < 6; i++)
+            *(DefaultMac + i) = *(ConfigBuf + i);
+    }
+    WriteCurConfig(MacBufAddr, 8);
+}
+
+void ReadIapServerIpAddr(u8 *IapServer,u16 *port)
+{
+	u8 i;
+	*IapServer = 192;
+    *(IapServer + 1) = 168;
+    *(IapServer + 2) = 1;
+    *(IapServer + 3) = 252;
+	*port = DEFAULTIAPPORT;
+	if(ConfigCheck(BootLoaderAddr, 8))
+    {
+        for(i = 0; i < 4; i++)
+            *(IapServer + i) = *(ConfigBuf + i);
+    }
+    else if(ConfigCheck(BK_BootLoaderAddr, 8))
+    {
+        for(i = 0; i < 4; i++)
+            *(IapServer + i) = *(ConfigBuf + i);
+    }
+    WriteCurConfig(BootLoaderAddr, 8);
+}
+
+void ReadDefaultConfig(void)
+{
+    ReadNetIpAddr(Net.localIp);//读取本地Ip地址
+    ReadGateWayIp(Net.GatewayIP);//读取默认网关地址
+    ReadMacAddr(Net.MacAddr);//读取Mac地址
+	ReadIapServerIpAddr((u8*)&Net.IapServer,&Net.IapPort);//读取固件更新服务器地址
+	Net.DefaultIapServer[0] = Net.localIp[0];
+	Net.DefaultIapServer[1] = Net.localIp[1];
+	Net.DefaultIapServer[2] = Net.localIp[2];
+	Net.DefaultIapServer[3] = 252;
+	Net.port = 5000;
+}
+

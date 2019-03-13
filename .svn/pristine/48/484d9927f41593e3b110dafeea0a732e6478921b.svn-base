@@ -1,0 +1,24 @@
+#include "DataBean.h"
+
+cJSON* AckBean;
+
+u8* createDataBean(char* AckType)
+{
+	AckBean = cJSON_CreateObject();
+	cJSON_AddStringToObject(AckBean,KEY_DEVTYPE,VAL_DEVTYPE);//设备类型---综合分站
+	cJSON_AddStringToObject(AckBean,KEY_DATATYPE,AckType);//数据包类型---设备注册
+	cJSON_AddStringToObject(AckBean,KEY_BOOTSOFTVERB,VAL_BOOTSOFTVERB);//引导程序版本
+	cJSON_AddNullToObject(AckBean,KEY_HEXSIZE);//hex文件总长度
+	cJSON_AddNullToObject(AckBean,KEY_UPDATESIZE);//当前已更新长度
+	cJSON_AddNullToObject(AckBean,KEY_DATALEN);//数据长度
+	cJSON_AddNullToObject(AckBean,KEY_DATA);//数据体
+	cJSON_AddNullToObject(AckBean,KEY_DATAADDRESS);//数据写入地址
+	return (u8*)cJSON_PrintUnformatted(AckBean);
+}
+
+void DeleteBean(void)
+{
+	cJSON_Delete(AckBean);
+}
+
+
